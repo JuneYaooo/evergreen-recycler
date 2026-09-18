@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="t d">
+  <title id="t">evergreen-recycler</title>
+  <desc id="d">从历史帖子数据挑出赢家内容，生成变体重发排期表</desc>
+  <rect width="1440" height="640" fill="#F2F5EF"/>
+  <rect x="0" y="0" width="1440" height="16" fill="#2E7D5B"/>
+  <rect x="72" y="64" width="1296" height="512" rx="8" fill="#171A19"/>
+  <text x="120" y="130" fill="#8FD6B4" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700">EVERGREEN RECYCLER · WINNER DETECTION + VARIANT REPOST SCHEDULE</text>
+  <text x="120" y="228" fill="#FFFFFF" font-family="Arial, 'PingFang SC', sans-serif" font-size="66" font-weight="800">老帖翻红排期</text>
+  <text x="120" y="292" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="30">历史帖子 CSV 里自动找赢家（平台内中位数倍数 + 分位数），排期硬约束防重复曝光，</text>
+  <text x="120" y="338" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="30">每条留出理由位与文案变体方向——变体重发，绝不原样重贴。</text>
+  <g transform="translate(120 408)">
+    <rect width="360" height="120" rx="6" fill="#2A2E2C"/>
+    <text x="24" y="38" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" font-weight="700">输入：历史帖子台账（posts.csv）</text>
+    <text x="24" y="70" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">平台 · 标题 · 发布日期 · 播放 · 赞 · 评论</text>
+    <text x="24" y="96" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">67 行 · 5 个平台 · 缺字段容忍（合成样本）</text>
+  </g>
+  <text x="516" y="478" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="800">→</text>
+  <g transform="translate(560 408)">
+    <rect width="688" height="120" rx="6" fill="#2E7D5B"/>
+    <text x="24" y="38" fill="#FFFFFF" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" font-weight="700">输出：变体重发排期（真实运行节选）</text>
+    <text x="24" y="70" fill="#D8EFE2" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">09-20 装修避坑 4.93x·P100 ｜ 09-20 记账法 4.7x·P100</text>
+    <text x="24" y="96" fill="#D8EFE2" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">7 条排期 · 每平台 7 天 ≤3 条 · 同帖 ≥60 天 · bi_002 仅标记不排期</text>
+  </g>
+  <text x="120" y="572" fill="#555954" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">样例输出取自仓库内真实运行产物 evals/runs_v1/main_schedule.md（合成样本夹具）</text>
+</svg>

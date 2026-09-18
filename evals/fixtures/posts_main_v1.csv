@@ -1,0 +1,68 @@
+platform,post_id,title,url,publish_date,views,likes,comments
+xiaohongshu,xhs_011,全职带娃两年重返职场，面试官问的第一个问题,https://example.com/xhs_011,2026-06-01,9600,640,155
+douyin,dy_012,孩子发烧物理降温的正确做法，很多家长第一步就错了,https://example.com/dy_012,2026-07-10,38000,1900,430
+xiaohongshu,xhs_019,30 岁转行做设计的真实收入和时间表,https://example.com/xhs_019,2025-11-30,11200,745,188
+bilibili,bi_001,设备党别再卷了：够用就行,https://example.com/bi_001,2025-11-29,6200,310,88
+bilibili,bi_005,一年省下三千块的平替清单,https://example.com/bi_005,2026-06-24,6600,330,90
+xiaohongshu,xhs_008,预算表模板：月光三年后的自救,https://example.com/xhs_008,2026-01-06,3500,180,38
+weibo,wb_011,健身房年卡使用率调查,https://example.com/wb_011,2026-08-12,5250,218,44
+douyin,dy_017,坏行：日期写错,,去年夏天,8000,400,60
+douyin,dy_010,阳台防水自己动手全流程,https://example.com/dy_010,2026-02-02,9300,465,76
+weibo,wb_002,地铁上看到的神级带娃操作,https://example.com/wb_002,2026-01-04,4800,195,40
+douyin,dy_006,出租屋灯光改造前后,https://example.com/dy_006,2025-12-11,8900,445,71
+xiaohongshu,xhs_020,阳台种菜三个月记录,https://example.com/xhs_020,2026-08-01,2550,128,24
+xiaohongshu,xhs_019,运动鞋清洗保养全攻略,https://example.com/xhs_019,2026-07-28,2350,118,21
+xiaohongshu,xhs_010,咖啡器具入门避坑指南,https://example.com/xhs_010,2026-04-21,2700,135,25
+weibo,wb_004,演唱会返场视频为什么让人起鸡皮疙瘩,https://example.com/wb_004,2026-02-19,4600,185,38
+xiaohongshu,xhs_017,一次说清公积金怎么用,https://example.com/xhs_017,2026-07-03,3050,155,30
+xiaohongshu,xhs_014,租房电费省钱实录,https://example.com/xhs_014,2026-06-01,2050,98,15
+douyin,dy_007,菜市场砍价话术实测,https://example.com/dy_007,2025-12-31,7600,380,60
+douyin,dy_001,三分钟学会调一家烧烤店的蘸料,https://example.com/dy_001,2025-10-13,8200,410,66
+xiaohongshu,xhs_012,旧毛衣改造手作，材料费不到 20 元,https://example.com/xhs_012,2026-05-20,3200,165,33
+xiaohongshu,xhs_016,素颜也能出门的底妆思路,https://example.com/xhs_016,2026-06-20,2250,112,19
+bilibili,bi_006,为什么我退掉了所有视频会员,https://example.com/bi_006,2026-07-05,7100,355,98
+wechat,wx_002,复盘：一次失败的社群运营,https://example.com/wx_002,2025-11-16,3900,120,50
+douyin,dy_011,小学生文具避坑实录,https://example.com/dy_011,2026-02-15,7900,395,63
+xiaohongshu,xhs_007,手机摄影 3 个设置立刻提升出片率,https://example.com/xhs_007,2026-01-04,2900,150,28
+douyin,dy_004,新手钓鱼最容易被割韭菜的装备,https://example.com/dy_004,2025-11-10,8600,430,69
+wechat,wx_006,记录：陪父亲住院的两周,https://example.com/wx_006,2026-03-04,4500,150,62
+weibo,wb_009,高铁上的静音车厢体验报告,https://example.com/wb_009,2026-06-30,5450,228,48
+xiaohongshu,,坏行：缺 post_id,,2026-02-14,1000,50,10
+xiaohongshu,xhs_021,没有链接的旧帖（缺 url）,,2026-03-08,11800,700,160
+wechat,wx_003,访谈：自由职业第五年的账本,https://example.com/wx_003,2025-12-16,4400,145,60
+douyin,dy_008,自驾游出发前必查的 5 个地方,https://example.com/dy_008,2026-01-03,8300,415,67
+bilibili,bi_002,从零搭一个家庭 NAS,https://example.com/bi_002,2025-12-30,26000,1500,400
+xiaohongshu,xhs_009,小户型玄关改造前后对比,https://example.com/xhs_009,2026-03-05,2100,100,17
+xiaohongshu,xhs_011,周末一日游：不扎堆的城郊路线,https://example.com/xhs_011,2026-05-17,2300,115,20
+weibo,wb_005,公司食堂的神仙菜品大赏,https://example.com/wb_005,2026-03-14,5300,220,46
+wechat,wx_005,观点：短视频时代还要不要写长文,https://example.com/wx_005,2026-01-09,4300,140,58
+wechat,wx_004,工具流：一个人如何周更三篇,https://example.com/wx_004,2026-01-03,3700,115,48
+weibo,wb_012,小区门口修鞋匠的手艺,https://example.com/wb_012,2026-08-20,4850,198,40
+bilibili,bi_004,宿舍用电安全实验,https://example.com/bi_004,2026-04-28,6800,340,92
+xiaohongshu,xhs_015,平板学习生产力配置清单,https://example.com/xhs_015,2026-06-18,3350,172,36
+weibo,wb_003,纸质书和电子书之争十年了,https://example.com/wb_003,2026-01-28,5400,225,47
+douyin,dy_009,家用工具箱必备清单,https://example.com/dy_009,2026-01-27,8800,440,70
+weibo,wb_006,一场大雪后的城市早高峰,https://example.com/wb_006,2026-06-03,4900,200,41
+weibo,wb_002,十年前的今天我发了第一条微博，翻完了全部时间线,https://example.com/wb_002,2026-02-19,21000,980,260
+xiaohongshu,xhs_003,新手化妆刷到底要买几把,https://example.com/xhs_003,2025-11-18,2200,110,18
+xiaohongshu,xhs_001,怎么把通勤时间变成第二个自习室,https://example.com/xhs_001,2025-10-22,2600,130,24
+douyin,dy_002,旧手机别扔，改造成家庭监控,https://example.com/dy_002,2025-10-25,9100,455,74
+bilibili,bi_003,键盘客制化入坑成本核算,https://example.com/bi_003,2026-04-13,7000,350,95
+douyin,dy_016,缺点赞评论字段的行,https://example.com/dy_016,2026-05-19,8700,,
+weibo,wb_001,加班到凌晨的出租车司机聊天记录,https://example.com/wb_001,2025-12-25,5100,210,44
+xiaohongshu,xhs_003,毕业五年，我靠这套记账法存下第一个十万,https://example.com/xhs_003,2025-12-12,12800,860,210
+xiaohongshu,xhs_002,租房改造 800 元全屋收纳清单,https://example.com/xhs_002,2025-11-16,3100,160,31
+douyin,dy_012,二手车上路前检查清单,https://example.com/dy_012,2026-03-13,8400,420,68
+xiaohongshu,xhs_006,极简衣柜：一年没买新衣服之后,https://example.com/xhs_006,2026-01-03,3300,170,35
+douyin,dy_005,每天 10 分钟跳绳一个月变化,https://example.com/dy_005,2025-12-01,9500,475,78
+xiaohongshu,xhs_005,平价好用的 5 支唇釉实测,https://example.com/xhs_005,2025-12-20,2400,120,22
+wechat,wx_001,深度：县城咖啡店生存报告,https://example.com/wx_001,2025-11-10,4100,130,55
+xiaohongshu,xhs_004,打工人午餐便当 15 分钟搞定,https://example.com/xhs_004,2025-12-12,2800,140,26
+weibo,wb_013,缺播放量的行,https://example.com/wb_013,2026-07-02,,205,41
+douyin,dy_004,装修队不会告诉你的 8 个增项套路,https://example.com/dy_004,2025-12-11,42000,2100,480
+weibo,wb_010,流浪猫在写字楼下安家的第三年,https://example.com/wb_010,2026-07-20,5000,205,42
+douyin,dy_003,超市里我从不买的 6 样东西,https://example.com/dy_003,2025-10-26,7800,390,62
+weibo,wb_007,老小区加装电梯的第一天,https://example.com/wb_007,2026-06-15,5200,215,45
+xiaohongshu,xhs_018,理财入门书单：从月光到有存款,https://example.com/xhs_018,2026-07-14,3450,178,37
+weibo,wb_008,夜市摊主的一句话营销教科书,https://example.com/wb_008,2026-06-28,4700,190,39
+xiaohongshu,xhs_013,早起困难户的 6 点起床方案,https://example.com/xhs_013,2026-05-27,2500,125,23

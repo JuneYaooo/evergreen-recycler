@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "mode": "schedule",
+  "as_of": "2026-09-19",
+  "params": {
+    "weeks": 4,
+    "weekly_cap": 3,
+    "min_gap_days": 1,
+    "recycle_gap_days": 60,
+    "min_sample": 10,
+    "median_x": 3.0,
+    "min_percentile": 75.0,
+    "like_weight": 2,
+    "comment_weight": 3,
+    "start_date": "2026-09-20"
+  },
+  "data_health": {
+    "total_rows": 24,
+    "valid_rows": 24,
+    "skipped": {},
+    "missing_metric_rows": 0
+  },
+  "platforms": [
+    {
+      "platform": "zhihu",
+      "posts": 24,
+      "degraded": false,
+      "median_engagement": 1212.5,
+      "winner_count": 0,
+      "scheduled_count": 0
+    }
+  ],
+  "scheduled_count": 0,
+  "backlog_count": 0,
+  "scheduled_posts": [],
+  "backlog": []
+}

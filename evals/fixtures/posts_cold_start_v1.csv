@@ -1,0 +1,13 @@
+platform,post_id,title,url,publish_date,views,likes,comments
+xiaohongshu,cs_001,刚开号第 1 篇,https://example.com/cs_001,2026-06-01,900,45,8
+douyin,cs_002,刚开号第 2 篇,https://example.com/cs_002,2026-06-09,940,46,8
+xiaohongshu,cs_003,刚开号第 3 篇,https://example.com/cs_003,2026-06-17,980,47,9
+douyin,cs_004,刚开号第 4 篇,https://example.com/cs_004,2026-06-25,1020,48,9
+xiaohongshu,cs_005,刚开号第 5 篇,https://example.com/cs_005,2026-07-03,1060,49,10
+douyin,cs_006,刚开号第 6 篇,https://example.com/cs_006,2026-07-11,1100,50,10
+xiaohongshu,cs_007,刚开号第 7 篇,https://example.com/cs_007,2026-07-19,1140,51,11
+douyin,cs_008,刚开号第 8 篇,https://example.com/cs_008,2026-07-27,1180,52,11
+xiaohongshu,cs_009,刚开号第 9 篇,https://example.com/cs_009,2026-08-04,1220,53,12
+douyin,cs_010,刚开号第 10 篇,https://example.com/cs_010,2026-08-12,1260,54,12
+xiaohongshu,cs_011,刚开号第 11 篇,https://example.com/cs_011,2026-08-20,1300,55,13
+douyin,cs_012,刚开号第 12 篇,https://example.com/cs_012,2026-08-28,1340,56,13

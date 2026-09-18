@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="t d">
+  <title id="t">evergreen-recycler</title>
+  <desc id="d">老帖翻红：循环箭头托起上升趋势</desc>
+  <rect width="128" height="128" rx="24" fill="#171A19"/>
+  <path d="M38 34 a30 30 0 1 0 24 -10" stroke="#2E7D5B" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M52 18 l12 6 l-10 10" fill="none" stroke="#2E7D5B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42 84 l16 -16 l10 8 l20 -24" stroke="#8FD6B4" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M88 52 l2 12 l-12 -4 z" fill="#8FD6B4"/>
+  <rect x="34" y="92" width="8" height="8" rx="2" fill="#F0C94B"/>
+  <rect x="50" y="92" width="8" height="8" rx="2" fill="#F0C94B"/>
+  <rect x="66" y="92" width="8" height="8" rx="2" fill="#D6D4CB"/>
+  <rect x="82" y="92" width="8" height="8" rx="2" fill="#D6D4CB"/>
+</svg>

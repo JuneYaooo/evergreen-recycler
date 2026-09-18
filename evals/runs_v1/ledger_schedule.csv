@@ -1,0 +1,7 @@
+﻿planned_date,platform,post_id,title,url,publish_date,views,likes,comments,engagement,median_multiple,percentile_rank,days_since_publish,days_since_previous,reason_hint,variant_direction,status
+2026-09-20,douyin,dy_004,装修队不会告诉你的 8 个增项套路,https://example.com/dy_004,2025-12-11,42000,2100,480,47640,4.93,100.0,282,,4.93x 基线 · P100.0,,pending
+2026-09-20,weibo,wb_002,十年前的今天我发了第一条微博，翻完了全部时间线,https://example.com/wb_002,2026-02-19,21000,980,260,23740,4.24,100.0,212,81,4.24x 基线 · P100.0,,pending
+2026-09-20,xiaohongshu,xhs_021,没有链接的旧帖（缺 url）,,2026-03-08,11800,700,160,13680,4.25,95.8,195,,4.25x 基线 · P95.8,,pending
+2026-09-21,douyin,dy_012,孩子发烧物理降温的正确做法，很多家长第一步就错了,https://example.com/dy_012,2026-07-10,38000,1900,430,43090,4.46,93.3,71,,4.46x 基线 · P93.3,,pending
+2026-09-21,xiaohongshu,xhs_019,30 岁转行做设计的真实收入和时间表,https://example.com/xhs_019,2025-11-30,11200,745,188,13254,4.11,91.7,293,,4.11x 基线 · P91.7,,pending
+2026-09-22,xiaohongshu,xhs_011,全职带娃两年重返职场，面试官问的第一个问题,https://example.com/xhs_011,2026-06-01,9600,640,155,11345,3.52,87.5,110,,3.52x 基线 · P87.5,,pending

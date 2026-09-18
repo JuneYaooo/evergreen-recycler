@@ -1,0 +1,7 @@
+interface:
+  display_name: "老帖翻红排期"
+  short_description: "挑出赢家老帖，生成变体重发排期"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+  brand_color: "#2E7D5B"
+  default_prompt: "Use $evergreen-recycler to detect winner posts from my historical posts CSV and build a variant repost schedule with reasons and rewrite directions for each entry."

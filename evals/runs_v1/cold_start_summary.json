@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "mode": "cold_start",
+  "as_of": "2026-09-19",
+  "params": {
+    "weeks": 4,
+    "weekly_cap": 3,
+    "min_gap_days": 1,
+    "recycle_gap_days": 60,
+    "min_sample": 10,
+    "median_x": 3.0,
+    "min_percentile": 75.0,
+    "like_weight": 2,
+    "comment_weight": 3,
+    "start_date": "2026-09-20"
+  },
+  "data_health": {
+    "total_rows": 12,
+    "valid_rows": 12,
+    "skipped": {},
+    "missing_metric_rows": 0
+  },
+  "platforms": [
+    {
+      "platform": "douyin",
+      "posts": 6,
+      "degraded": true,
+      "median_engagement": null,
+      "winner_count": 0,
+      "scheduled_count": 0
+    },
+    {
+      "platform": "xiaohongshu",
+      "posts": 6,
+      "degraded": true,
+      "median_engagement": null,
+      "winner_count": 0,
+      "scheduled_count": 0
+    }
+  ],
+  "scheduled_count": 0,
+  "backlog_count": 0,
+  "scheduled_posts": [],
+  "backlog": []
+}

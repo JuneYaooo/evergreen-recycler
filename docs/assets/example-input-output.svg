@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="700" viewBox="0 0 1440 700" role="img" aria-labelledby="t d">
+  <title id="t">输入输出对照</title>
+  <desc id="d">左侧为历史帖子 CSV 节选，右侧为赢家检测与排期表节选，含降级与待定</desc>
+  <rect width="1440" height="700" fill="#F2F5EF"/>
+  <rect x="0" y="684" width="1440" height="16" fill="#2E7D5B"/>
+  <text x="120" y="72" fill="#2E7D5B" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700">输入：posts.csv（合成夹具节选）→ 输出：排期表（真实运行产物节选）</text>
+
+  <g transform="translate(120 110)">
+    <rect width="560" height="500" rx="8" fill="#FFFFFF" stroke="#D8DED4"/>
+    <text x="28" y="44" fill="#171A19" font-family="Menlo, monospace" font-size="17" font-weight="700">platform,post_id,title,…,views,likes,comments</text>
+    <text x="28" y="88" fill="#44503F" font-family="Menlo, monospace" font-size="16">xiaohongshu,xhs_001,通勤自习室,2600,130,24</text>
+    <text x="28" y="118" fill="#44503F" font-family="Menlo, monospace" font-size="16">xiaohongshu,xhs_002,租房收纳,3100,160,31</text>
+    <text x="28" y="148" fill="#171A19" font-family="Menlo, monospace" font-size="16" font-weight="700">xiaohongshu,xhs_003,记账法存下十万,12800,860,210</text>
+    <text x="28" y="178" fill="#44503F" font-family="Menlo, monospace" font-size="16">douyin,dy_001,烧烤蘸料,8200,410,66</text>
+    <text x="28" y="208" fill="#171A19" font-family="Menlo, monospace" font-size="16" font-weight="700">douyin,dy_004,装修增项套路,42000,2100,480</text>
+    <text x="28" y="238" fill="#44503F" font-family="Menlo, monospace" font-size="16">weibo,wb_001,出租车司机,5100,210,44</text>
+    <text x="28" y="268" fill="#44503F" font-family="Menlo, monospace" font-size="16">bilibili,bi_002,家庭 NAS,26000,1500,400 ← 仅 6 条</text>
+    <text x="28" y="298" fill="#44503F" font-family="Menlo, monospace" font-size="16">xiaohongshu,,缺 post_id 的坏行,1000,50,10</text>
+    <text x="28" y="328" fill="#44503F" font-family="Menlo, monospace" font-size="16">douyin,dy_017,日期写成「去年夏天」,8000,400,60</text>
+    <text x="28" y="376" fill="#8A6D1F" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">· 粗体行 = 设计上的高互动赢家</text>
+    <text x="28" y="406" fill="#8A6D1F" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">· 缺字段行按 0 计入、坏行跳过并计数</text>
+    <text x="28" y="436" fill="#8A6D1F" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">· 67 行 / 5 平台 / 日期乱序（合成样本）</text>
+    <text x="28" y="466" fill="#555954" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">对应文件：evals/fixtures/posts_main_v1.csv</text>
+  </g>
+
+  <text x="706" y="380" fill="#2E7D5B" font-family="Arial, 'PingFang SC', sans-serif" font-size="40" font-weight="800">→</text>
+
+  <g transform="translate(760 110)">
+    <rect width="560" height="500" rx="8" fill="#171A19"/>
+    <text x="28" y="44" fill="#8FD6B4" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" font-weight="700">排期表（节选，基准日 2026-09-19）</text>
+    <text x="28" y="82" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">数据体检：有效 65/67 · 跳过缺 post_id 1 行、坏日期 1 行</text>
+    <text x="28" y="126" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" font-weight="700">09-20（日）装修队不会告诉你的 8 个增项套路</text>
+    <text x="28" y="152" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">　douyin ｜ 4.93x · P100 ｜ 距首发 282 天 ｜ 首次再发</text>
+    <text x="28" y="196" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" font-weight="700">09-20（日）毕业五年，我靠这套记账法存下第一个十万</text>
+    <text x="28" y="222" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">　xiaohongshu ｜ 4.7x · P100 ｜ 距首发 281 天 ｜ 首次再发</text>
+    <text x="28" y="266" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" font-weight="700">09-21（一）没有链接的旧帖（缺 url）← 纯标题展示</text>
+    <text x="28" y="292" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">　xiaohongshu ｜ 4.25x · P95.8 ｜ 缺字段容忍</text>
+    <text x="28" y="336" fill="#E8A9A0" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" font-weight="700">已标记、本期待定：</text>
+    <text x="28" y="362" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">bilibili｜家庭 NAS｜3.84x —— 样本不足 10 条，仅标记不排期</text>
+    <text x="28" y="406" fill="#8FD6B4" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" font-weight="700">每条附：理由位（脚本依据）+ 文案变体方向（Agent 填写）</text>
+    <text x="28" y="436" fill="#8FD6B4" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">硬约束：每平台 7 天 ≤3 条 · 同帖 ≥60 天 · 同平台 ≥1 天</text>
+    <text x="28" y="466" fill="#555954" font-family="Arial, 'PingFang SC', sans-serif" font-size="15">对应文件：evals/runs_v1/main_schedule.md（完整表格见仓库）</text>
+  </g>
+  <text x="120" y="656" fill="#555954" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">两侧均为合成样本；右侧文字逐字取自 v0.1.0 真实运行产物，未修饰数据</text>
+</svg>

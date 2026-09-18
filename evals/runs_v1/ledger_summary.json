@@ -1,0 +1,90 @@
+{
+  "version": "0.1.0",
+  "mode": "schedule",
+  "as_of": "2026-09-19",
+  "params": {
+    "weeks": 4,
+    "weekly_cap": 3,
+    "min_gap_days": 1,
+    "recycle_gap_days": 60,
+    "min_sample": 10,
+    "median_x": 3.0,
+    "min_percentile": 75.0,
+    "like_weight": 2,
+    "comment_weight": 3,
+    "start_date": "2026-09-20"
+  },
+  "data_health": {
+    "total_rows": 67,
+    "valid_rows": 65,
+    "skipped": {
+      "发布日期无法解析": 1,
+      "缺 post_id": 1
+    },
+    "missing_metric_rows": 2
+  },
+  "platforms": [
+    {
+      "platform": "bilibili",
+      "posts": 6,
+      "degraded": true,
+      "median_engagement": 7870.5,
+      "winner_count": 1,
+      "scheduled_count": 0
+    },
+    {
+      "platform": "douyin",
+      "posts": 15,
+      "degraded": false,
+      "median_engagement": 9667,
+      "winner_count": 2,
+      "scheduled_count": 2
+    },
+    {
+      "platform": "wechat",
+      "posts": 6,
+      "degraded": true,
+      "median_engagement": 4639.5,
+      "winner_count": 0,
+      "scheduled_count": 0
+    },
+    {
+      "platform": "weibo",
+      "posts": 14,
+      "degraded": false,
+      "median_engagement": 5594.0,
+      "winner_count": 1,
+      "scheduled_count": 1
+    },
+    {
+      "platform": "xiaohongshu",
+      "posts": 24,
+      "degraded": false,
+      "median_engagement": 3221.0,
+      "winner_count": 4,
+      "scheduled_count": 3
+    }
+  ],
+  "scheduled_count": 6,
+  "backlog_count": 2,
+  "scheduled_posts": [
+    "dy_004",
+    "wb_002",
+    "xhs_021",
+    "dy_012",
+    "xhs_019",
+    "xhs_011"
+  ],
+  "backlog": [
+    {
+      "post_id": "xhs_003",
+      "platform": "xiaohongshu",
+      "reason": "同帖再发间隔 ≥60 天，最早可排 2026-10-29，超出本规划期"
+    },
+    {
+      "post_id": "bi_002",
+      "platform": "bilibili",
+      "reason": "平台样本不足 10 条，仅标记不排期"
+    }
+  ]
+}

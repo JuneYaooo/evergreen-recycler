@@ -1,0 +1,16 @@
+evergreen-recycler
+Copyright 2026 JuneYaooo
+
+This product includes original skill guidance, a deterministic evergreen
+post recycling scheduler, and evaluation artifacts released under the
+Apache License, Version 2.0.
+
+Products named in references/benchmarks.md (CoSchedule ReQueue,
+ContentStudio, SmarterQueue, Postiz, social-auto-upload, etc.) identify
+sources of design lessons only. Those products and any third-party
+materials remain subject to their own terms; nothing from them is
+redistributed in this repository. Platform rule descriptions (such as
+Xiaohongshu's 180-day content fingerprint) reflect public discussions at
+the research date (2026-09-19) and may change without notice. All
+evaluation fixtures are synthetic; any resemblance to real accounts is
+coincidental.
