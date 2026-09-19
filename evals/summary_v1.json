@@ -25,21 +25,21 @@
       }
     },
     "skill": {
-      "judgment_count": 9,
-      "unique_case_count": 9,
-      "pass_count": 9,
+      "judgment_count": 10,
+      "unique_case_count": 10,
+      "pass_count": 10,
       "pass_rate": 1.0,
       "pass_rate_wilson_95": [
-        0.7008,
+        0.7225,
         1.0
       ],
       "critical_failure_count": 0,
       "dimension_means_0_to_4": {
-        "project_understanding": 3.667,
+        "project_understanding": 3.7,
         "real_effect": 4.0,
-        "iteration_improvement": 3.444,
-        "effect_evaluation": 3.889,
-        "showcase_integrity": 3.444
+        "iteration_improvement": 3.5,
+        "effect_evaluation": 3.9,
+        "showcase_integrity": 3.4
       }
     }
   },

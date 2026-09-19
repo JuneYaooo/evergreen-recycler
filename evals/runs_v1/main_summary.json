@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "mode": "schedule",
   "as_of": "2026-09-19",
   "params": {
@@ -12,6 +12,7 @@
     "min_percentile": 75.0,
     "like_weight": 2,
     "comment_weight": 3,
+    "metric": "total",
     "start_date": "2026-09-20"
   },
   "data_health": {
@@ -29,6 +30,7 @@
       "posts": 6,
       "degraded": true,
       "median_engagement": 7870.5,
+      "median_metric_value": 7870.5,
       "winner_count": 1,
       "scheduled_count": 0
     },
@@ -37,6 +39,7 @@
       "posts": 15,
       "degraded": false,
       "median_engagement": 9667,
+      "median_metric_value": 9667,
       "winner_count": 2,
       "scheduled_count": 2
     },
@@ -45,6 +48,7 @@
       "posts": 6,
       "degraded": true,
       "median_engagement": 4639.5,
+      "median_metric_value": 4639.5,
       "winner_count": 0,
       "scheduled_count": 0
     },
@@ -53,6 +57,7 @@
       "posts": 14,
       "degraded": false,
       "median_engagement": 5594.0,
+      "median_metric_value": 5594.0,
       "winner_count": 1,
       "scheduled_count": 1
     },
@@ -61,6 +66,7 @@
       "posts": 24,
       "degraded": false,
       "median_engagement": 3221.0,
+      "median_metric_value": 3221.0,
       "winner_count": 4,
       "scheduled_count": 4
     }

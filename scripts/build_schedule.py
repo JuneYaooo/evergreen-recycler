@@ -9,8 +9,10 @@
 输出：
   排期表 Markdown（-o）+ schedule.csv（--csv）+ 汇总 JSON（--json）
 
-赢家口径：平台内互动量（views + likes×权重 + comments×权重）
-≥ 平台中位数 ×3.0 且 ≥ P75；平台样本 <10 条时降级为「仅标记不排期」。
+赢家口径（--metric）：平台内互动量（views + likes×权重 + comments×权重）
+≥ 平台中位数 ×3.0 且 ≥ P75；total 按累计互动量（默认，v0.1.0 行为），per_day 按
+日均互动量（互动量 ÷ max(距基准日存活天数, 1)，修正老帖的累计优势）。
+平台样本 <10 条时降级为「仅标记不排期」。
 排期硬约束：每平台每周 ≤3 条、同帖两次再发间隔 ≥60 天、同平台排期日间隔 ≥1 天。
 红线：输出是「变体重发」建议，绝不建议原样重发（小红书 180 天内容指纹 /
 抖音重复判定）；重发也不等于删除原帖。
@@ -29,7 +31,7 @@ from datetime import date, timedelta
 from pathlib import Path
 from statistics import median
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 
 COLD_START_POSTS = 20          # 有效帖少于该数 → 冷启动建议，不硬排
 DEFAULT_WEEKLY_CAP = 3         # 每平台每周上限（对齐 ReQueue 常青组经验值）
@@ -40,6 +42,8 @@ DEFAULT_MEDIAN_X = 3.0         # 赢家中位数倍数阈值
 DEFAULT_MIN_PERCENTILE = 75.0  # 赢家分位数下限
 DEFAULT_LIKE_WEIGHT = 2        # 互动量 = views + likes×2 + comments×3
 DEFAULT_COMMENT_WEIGHT = 3
+DEFAULT_METRIC = "total"       # 赢家口径：total=累计互动量（默认），per_day=日均互动量
+METRIC_CHOICES = ("total", "per_day")
 
 RED_LINE = ("输出为「变体重发」建议：绝不建议原样重发（小红书会比对 180 天内的"
             "内容指纹，抖音对重复内容限流）；重发也不等于删除原帖。")
@@ -175,6 +179,20 @@ def engagement(post: dict, like_weight: int, comment_weight: int) -> float:
     return post["views"] + like_weight * post["likes"] + comment_weight * post["comments"]
 
 
+def metric_value(post: dict, as_of: date | None, metric: str,
+                 like_weight: int, comment_weight: int) -> float:
+    """赢家口径的比较值：total=累计互动量；per_day=日均互动量。
+
+    per_day = 互动量 ÷ max(距基准日存活天数, 1)；发布当天或日期晚于基准日按
+    1 天计，避免除零，也避免极新帖被无限放大。
+    """
+    value = engagement(post, like_weight, comment_weight)
+    if metric == "per_day":
+        age_days = (as_of - post["publish_date"]).days
+        return value / max(age_days, 1)
+    return value
+
+
 def percentile(sorted_values: list[float], pct: float) -> float:
     """线性插值分位数；空列表返回 0。"""
     if not sorted_values:
@@ -189,25 +207,37 @@ def percentile(sorted_values: list[float], pct: float) -> float:
 
 
 def detect_winners(posts: list[dict], like_weight: int, comment_weight: int,
-                   median_x: float, min_percentile: float, min_sample: int) -> list[dict]:
-    """平台内赢家检测：互动量 ≥ 中位数×median_x 且 ≥ P75；样本不足降级标注。"""
+                   median_x: float, min_percentile: float, min_sample: int,
+                   as_of: date | None = None, metric: str = DEFAULT_METRIC) -> list[dict]:
+    """平台内赢家检测：所选口径值 ≥ 中位数×median_x 且 ≥ P75；样本不足降级标注。
+
+    metric="total"（默认）按累计互动量比较，与 v0.1.0 行为一致；metric="per_day"
+    按日均互动量比较，修正老帖的累计优势，此时必须提供 as_of 基准日。
+    报告与 CSV 中所有倍数均按所选口径标注（累计/日均）。
+    """
+    if metric not in METRIC_CHOICES:
+        raise ValueError(f"未知口径：{metric!r}（支持 {'/'.join(METRIC_CHOICES)}）")
+    if metric == "per_day" and as_of is None:
+        raise ValueError("口径 per_day 需要提供 as_of 基准日")
     by_platform: dict[str, list[dict]] = {}
     for post in posts:
         post["engagement"] = engagement(post, like_weight, comment_weight)
+        post["metric_value"] = metric_value(post, as_of, metric,
+                                            like_weight, comment_weight)
         by_platform.setdefault(post["platform"], []).append(post)
 
     winners: list[dict] = []
     for platform in sorted(by_platform):
         group = by_platform[platform]
-        values = sorted(post["engagement"] for post in group)
+        values = sorted(post["metric_value"] for post in group)
         med = median(values)
         p75 = percentile(values, 75.0)
         degraded = len(group) < min_sample
         for post in group:
-            if med <= 0 or post["engagement"] <= 0:
+            if med <= 0 or post["metric_value"] <= 0:
                 continue
-            multiple = post["engagement"] / med
-            rank = 100.0 * sum(1 for value in values if value <= post["engagement"]) / len(values)
+            multiple = post["metric_value"] / med
+            rank = 100.0 * sum(1 for value in values if value <= post["metric_value"]) / len(values)
             post["median_multiple"] = round(multiple, 2)
             post["percentile_rank"] = round(rank, 1)
             post["platform_median"] = round(med, 1)
@@ -217,10 +247,12 @@ def detect_winners(posts: list[dict], like_weight: int, comment_weight: int,
                     "post": post,
                     "platform": platform,
                     "degraded_only": degraded,
+                    "metric": metric,
+                    "metric_value": post["metric_value"],
                     "multiple": multiple,
                     "rank": rank,
                 })
-    winners.sort(key=lambda item: (-item["multiple"], -item["post"]["engagement"],
+    winners.sort(key=lambda item: (-item["multiple"], -item["post"]["metric_value"],
                                    item["platform"], item["post"]["post_id"]))
     return winners
 
@@ -296,12 +328,15 @@ def build_markdown(posts: list[dict], health: dict, winners: list[dict],
     by_platform: dict[str, list[dict]] = {}
     for post in posts:
         by_platform.setdefault(post["platform"], []).append(post)
+    metric_short = "累计" if args.metric == "total" else "日均"
+    metric_note = ("累计互动量" if args.metric == "total"
+                   else "日均互动量（互动量 ÷ max(存活天数, 1)）")
     lines = [
         "# 老帖翻红再发排期表",
         "",
         f"基准日 {args.as_of.isoformat()} ｜ 规划期 {start.isoformat()} ~ {horizon_end.isoformat()}"
         f"（{args.weeks} 周）｜ 赢家阈值：平台内中位数 ≥{args.median_x:g}x 且 ≥P{args.min_percentile:g}"
-        f" ｜ 版本 {VERSION}",
+        f" ｜ 赢家口径：{metric_note}（--metric {args.metric}）｜ 版本 {VERSION}",
         "",
     ]
 
@@ -335,7 +370,8 @@ def build_markdown(posts: list[dict], health: dict, winners: list[dict],
     lines += [
         "## 再发排期（变体重发，绝不原样重发）",
         "",
-        f"共 {len(scheduled)} 条进入排期；同帖两次再发间隔 ≥{args.recycle_gap_days} 天，"
+        f"共 {len(scheduled)} 条进入排期；赢家倍数按{metric_note}计算（口径 {args.metric}）。"
+        f"同帖两次再发间隔 ≥{args.recycle_gap_days} 天，"
         f"每平台任意 7 天内 ≤{args.weekly_cap} 条，同平台排期日间隔 ≥{args.min_gap_days} 天。"
         "「理由位」先给出脚本算出的依据，最终理由与「文案变体方向」由 Agent 结合帖子内容填写。",
         "",
@@ -362,9 +398,9 @@ def build_markdown(posts: list[dict], health: dict, winners: list[dict],
             lines.append(
                 f"| {row['planned_date'].isoformat()}（{'周' + '一二三四五六日'[row['planned_date'].weekday()]}）"
                 f" | {name} | {metrics}（{post['publish_date'].isoformat()} 发布）"
-                f" | {post.get('median_multiple', '-')}x · P{post.get('percentile_rank', '-')}"
+                f" | {post.get('median_multiple', '-')}x（{metric_short}）· P{post.get('percentile_rank', '-')}"
                 f" | {(args.as_of - post['publish_date']).days} 天 | {window}"
-                f" | {post.get('median_multiple', '-')}x 基线·P{post.get('percentile_rank', '-')}"
+                f" | {post.get('median_multiple', '-')}x {metric_short}基线·P{post.get('percentile_rank', '-')}"
                 f"（Agent 结合内容补全） | （Agent 填写：新钩子 / 新角度 / 换开头案例） |"
             )
         lines.append("")
@@ -375,7 +411,7 @@ def build_markdown(posts: list[dict], health: dict, winners: list[dict],
             post = entry["item"]["post"]
             title = (post.get("title") or post["post_id"]).replace("|", "／")
             lines.append(f"- {post['platform']}｜{title}｜{post.get('median_multiple', '-')}x"
-                         f" —— {entry['reason']}")
+                         f"（{metric_short}）—— {entry['reason']}")
         lines.append("")
 
     if not scheduled:
@@ -393,6 +429,8 @@ def build_markdown(posts: list[dict], health: dict, winners: list[dict],
         "## 边界说明",
         "",
         f"- {RED_LINE}",
+        f"- 赢家口径：{metric_note}（--metric {args.metric}）。累计口径下老帖有累积优势，"
+        "日均口径用存活天数归一近似修正，但发布不到 1 天的极新帖按 1 天计，单日爆发会被放大，取舍自负。",
         f"- 平台对重复内容的判定规则（如小红书 180 天内容指纹）随时可能调整，本工具的间隔与配额"
         f"（--recycle-gap-days、--weekly-cap）都是参数，默认值取保守，规则变化时自行收紧。",
         "- 排期依据是账号自身历史数据内的相对比较（平台内中位数倍数 + 分位数），不代表绝对流量承诺；"
@@ -417,9 +455,13 @@ def health_lines(health: dict, by_platform: dict[str, list[dict]]) -> list[str]:
 
 
 def schedule_csv_rows(scheduled: list[dict], args) -> list[dict]:
+    metric_short = "累计" if args.metric == "total" else "日均"
     rows = []
     for entry in scheduled:
         post = entry["item"]["post"]
+        metric_value = post.get("metric_value", 0.0)
+        metric_value_out = (int(metric_value) if float(metric_value).is_integer()
+                            else round(metric_value, 2))
         rows.append({
             "planned_date": entry["planned_date"].isoformat(),
             "platform": entry["item"]["platform"],
@@ -431,12 +473,14 @@ def schedule_csv_rows(scheduled: list[dict], args) -> list[dict]:
             "likes": post["likes"],
             "comments": post["comments"],
             "engagement": int(post["engagement"]),
+            "metric": args.metric,
+            "metric_value": metric_value_out,
             "median_multiple": post.get("median_multiple", ""),
             "percentile_rank": post.get("percentile_rank", ""),
             "days_since_publish": (args.as_of - post["publish_date"]).days,
             "days_since_previous": entry["days_since_previous"]
             if entry["days_since_previous"] is not None else "",
-            "reason_hint": f"{post.get('median_multiple', '-')}x 基线 · P{post.get('percentile_rank', '-')}",
+            "reason_hint": f"{post.get('median_multiple', '-')}x {metric_short}基线 · P{post.get('percentile_rank', '-')}",
             "variant_direction": "",
             "status": "pending",
         })
@@ -444,9 +488,9 @@ def schedule_csv_rows(scheduled: list[dict], args) -> list[dict]:
 
 
 CSV_FIELDS = ["planned_date", "platform", "post_id", "title", "url", "publish_date",
-              "views", "likes", "comments", "engagement", "median_multiple",
-              "percentile_rank", "days_since_publish", "days_since_previous",
-              "reason_hint", "variant_direction", "status"]
+              "views", "likes", "comments", "engagement", "metric", "metric_value",
+              "median_multiple", "percentile_rank", "days_since_publish",
+              "days_since_previous", "reason_hint", "variant_direction", "status"]
 
 
 def run(argv: list[str] | None = None) -> int:
@@ -476,6 +520,9 @@ def run(argv: list[str] | None = None) -> int:
                         help=f"互动量中点赞权重（默认 {DEFAULT_LIKE_WEIGHT}）")
     parser.add_argument("--comment-weight", type=int, default=DEFAULT_COMMENT_WEIGHT,
                         help=f"互动量中评论权重（默认 {DEFAULT_COMMENT_WEIGHT}）")
+    parser.add_argument("--metric", choices=METRIC_CHOICES, default=DEFAULT_METRIC,
+                        help="赢家口径：total=累计互动量（默认）；per_day=日均互动量"
+                             "（互动量 ÷ max(存活天数, 1)，修正老帖累计优势）")
     parser.add_argument("--ledger", type=Path, help="已再发记录 ledger.json，防止同帖短期内重复排期")
     args = parser.parse_args(argv)
 
@@ -499,7 +546,8 @@ def run(argv: list[str] | None = None) -> int:
     backlog: list[dict] = []
     if mode == "schedule":
         winners = detect_winners(posts, args.like_weight, args.comment_weight,
-                                 args.median_x, args.min_percentile, args.min_sample)
+                                 args.median_x, args.min_percentile, args.min_sample,
+                                 as_of=args.as_of, metric=args.metric)
         scheduled, backlog = build_schedule(winners, ledger, start, args.weeks,
                                             args.weekly_cap, args.min_gap_days,
                                             args.recycle_gap_days)
@@ -535,6 +583,7 @@ def run(argv: list[str] | None = None) -> int:
                 "min_percentile": args.min_percentile,
                 "like_weight": args.like_weight,
                 "comment_weight": args.comment_weight,
+                "metric": args.metric,
                 "start_date": start.isoformat(),
             },
             "data_health": health,
@@ -544,6 +593,8 @@ def run(argv: list[str] | None = None) -> int:
                     "posts": len(group),
                     "degraded": len(group) < args.min_sample,
                     "median_engagement": round(median(sorted(post["engagement"] for post in group)), 1)
+                    if mode == "schedule" and group else None,
+                    "median_metric_value": round(median(sorted(post["metric_value"] for post in group)), 1)
                     if mode == "schedule" and group else None,
                     "winner_count": sum(1 for item in winners if item["platform"] == name),
                     "scheduled_count": sum(1 for row in scheduled if row["item"]["platform"] == name),

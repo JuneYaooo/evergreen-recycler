@@ -12,28 +12,30 @@
     "min_percentile": 75.0,
     "like_weight": 2,
     "comment_weight": 3,
-    "metric": "total",
+    "metric": "per_day",
     "start_date": "2026-09-20"
   },
   "data_health": {
-    "total_rows": 24,
-    "valid_rows": 24,
+    "total_rows": 20,
+    "valid_rows": 20,
     "skipped": {},
     "missing_metric_rows": 0
   },
   "platforms": [
     {
-      "platform": "zhihu",
-      "posts": 24,
+      "platform": "xiaohongshu",
+      "posts": 20,
       "degraded": false,
-      "median_engagement": 1212.5,
-      "median_metric_value": 1212.5,
-      "winner_count": 0,
-      "scheduled_count": 0
+      "median_engagement": 2000.0,
+      "median_metric_value": 24.7,
+      "winner_count": 1,
+      "scheduled_count": 1
     }
   ],
-  "scheduled_count": 0,
+  "scheduled_count": 1,
   "backlog_count": 0,
-  "scheduled_posts": [],
+  "scheduled_posts": [
+    "new_fast"
+  ],
   "backlog": []
 }

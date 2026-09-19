@@ -75,6 +75,53 @@ class WinnerTests(unittest.TestCase):
         self.assertEqual(bs.detect_winners(posts, 2, 3, 3.0, 75.0, 10), [])
 
 
+class MetricTests(unittest.TestCase):
+    """赢家口径对照：累计（total）vs 日均（per_day）。
+
+    18 条基准帖互动量 2000、发布 2026-06-30（存活 81 天，日均 24.69）；
+    old_high 累计 7000（3.5x 中位数）但存活 353 天，日均 19.83（低于中位数）；
+    new_fast 累计 5000（仅 2.5x 中位数）但只存活 7 天，日均 714.29（28.9x 中位数）。
+    两种口径各选出不同赢家。
+    """
+
+    def _posts(self):
+        posts = [make_post(post_id=f"m{i:02d}", publish_date=date(2026, 6, 30),
+                           views=1550, likes=150, comments=50) for i in range(18)]
+        posts.append(make_post(post_id="old_high", publish_date=date(2025, 10, 1),
+                               views=5200, likes=600, comments=200))
+        posts.append(make_post(post_id="new_fast", publish_date=date(2026, 9, 12),
+                               views=3200, likes=600, comments=200))
+        return posts
+
+    def test_total_picks_old_high_per_day_picks_new_fast(self):
+        total = bs.detect_winners(self._posts(), 2, 3, 3.0, 75.0, 10,
+                                  as_of=AS_OF, metric="total")
+        per_day = bs.detect_winners(self._posts(), 2, 3, 3.0, 75.0, 10,
+                                    as_of=AS_OF, metric="per_day")
+        self.assertEqual([w["post"]["post_id"] for w in total], ["old_high"])
+        self.assertEqual([w["post"]["post_id"] for w in per_day], ["new_fast"])
+        # 累计口径与 v0.1.0 一致：multiple 基于原始互动量
+        self.assertAlmostEqual(total[0]["multiple"], 3.5)
+        self.assertAlmostEqual(per_day[0]["multiple"], 5000 / 7 / (2000 / 81), places=2)
+
+    def test_per_day_same_day_post_uses_floor_of_one_day(self):
+        posts = self._posts()
+        posts.append(make_post(post_id="today", publish_date=AS_OF,
+                               views=8000, likes=0, comments=0))
+        winners = bs.detect_winners(posts, 2, 3, 3.0, 75.0, 10,
+                                    as_of=AS_OF, metric="per_day")
+        ids = [w["post"]["post_id"] for w in winners]
+        self.assertIn("today", ids)      # 存活 0 天按 1 天计，日均 8000 最高
+        self.assertNotIn("old_high", ids)
+
+    def test_per_day_requires_as_of_and_rejects_unknown_metric(self):
+        with self.assertRaises(ValueError):
+            bs.detect_winners(self._posts(), 2, 3, 3.0, 75.0, 10, metric="per_day")
+        with self.assertRaises(ValueError):
+            bs.detect_winners(self._posts(), 2, 3, 3.0, 75.0, 10,
+                              as_of=AS_OF, metric="weekly")
+
+
 def winner_item(post, degraded=False):
     return {"post": post, "platform": post["platform"], "degraded_only": degraded,
             "multiple": 4.0, "rank": 90.0}
@@ -184,6 +231,47 @@ class RunTests(unittest.TestCase):
         report = out_md.read_text(encoding="utf-8")
         self.assertIn("先攒数据", report)
         self.assertNotIn("共 ", report.split("先攒数据")[1].split("##")[0])
+
+    def test_metric_option_end_to_end(self):
+        # 默认（--metric total）与显式 total 一致，选出累计赢家；per_day 选出日均赢家；
+        # 报告与 CSV 标注口径；--json 记录口径参数。
+        rows = ["platform,post_id,title,url,publish_date,views,likes,comments"]
+        for i in range(18):
+            rows.append(f"xiaohongshu,m{i:02d},基准帖,https://example.com/m{i},"
+                        f"2026-06-30,1550,150,50")
+        rows.append("xiaohongshu,old_high,老帖,https://example.com/oh,2025-10-01,5200,600,200")
+        rows.append("xiaohongshu,new_fast,新帖,https://example.com/nf,2026-09-12,3200,600,200")
+        posts = self._write("\n".join(rows) + "\n")
+
+        json_default = posts.parent / "m_default.json"
+        md_total = posts.parent / "m_total.md"
+        json_total = posts.parent / "m_total.json"
+        md_day = posts.parent / "m_day.md"
+        csv_day = posts.parent / "m_day.csv"
+        json_day = posts.parent / "m_day.json"
+
+        self.assertEqual(bs.run([str(posts), "-o", str(md_total), "--json", str(json_default),
+                                 "--as-of", "2026-09-19"]), 0)
+        self.assertEqual(bs.run([str(posts), "-o", str(md_total), "--json", str(json_total),
+                                 "--as-of", "2026-09-19", "--metric", "total"]), 0)
+        self.assertEqual(bs.run([str(posts), "-o", str(md_day), "--csv", str(csv_day),
+                                 "--json", str(json_day), "--as-of", "2026-09-19",
+                                 "--metric", "per_day"]), 0)
+
+        default = json.loads(json_default.read_text(encoding="utf-8"))
+        total = json.loads(json_total.read_text(encoding="utf-8"))
+        per_day = json.loads(json_day.read_text(encoding="utf-8"))
+        self.assertEqual(default["params"]["metric"], "total")  # 默认向后兼容
+        self.assertEqual(default["scheduled_posts"], ["old_high"])
+        self.assertEqual(total["scheduled_posts"], ["old_high"])
+        self.assertEqual(per_day["params"]["metric"], "per_day")
+        self.assertEqual(per_day["scheduled_posts"], ["new_fast"])
+
+        self.assertIn("累计互动量", md_total.read_text(encoding="utf-8"))
+        report_day = md_day.read_text(encoding="utf-8")
+        self.assertIn("日均互动量", report_day)
+        self.assertNotIn("old_high", csv_day.read_text(encoding="utf-8"))
+        self.assertIn("日均", csv_day.read_text(encoding="utf-8"))
 
     def test_determinism_same_bytes(self):
         import hashlib

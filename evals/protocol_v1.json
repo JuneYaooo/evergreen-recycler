@@ -5,9 +5,9 @@
   "rubric_file": "rubric_v1.md",
   "layers": {
     "script_behavior": {
-      "runner": "python3 scripts/build_schedule.py 于仓库根目录执行（命令见 docs/usage.md），对 evals/fixtures/ 的合成夹具逐条核对 cases_v1.jsonl 的 required/forbidden 原子检查；日期基准统一 --as-of 2026-09-19 保证可复现",
+      "runner": "python3 scripts/build_schedule.py 于仓库根目录执行（命令见 docs/usage.md），对 evals/fixtures/ 的合成夹具逐条核对 cases_v1.jsonl 的 required/forbidden 原子检查；日期基准统一 --as-of 2026-09-19 保证可复现；case e10 对口径对照夹具分别以 --metric total 与 --metric per_day 各跑一次",
       "runs_per_case": 1,
-      "note": "脚本为确定性统计与排期，case e7 显式验证两次运行三份输出文件 sha256 一致"
+      "note": "脚本为确定性统计与排期，case e7 显式验证两次运行三份输出文件 sha256 一致；v0.2.0 起赢家口径（--metric）纳入评测，默认 total 与 v0.1.0 结论一致"
     },
     "agent_workflow": {
       "runner": "ZCode CLI 中的 Agent 对排期表逐条填写理由位与文案变体方向（产物示例见 runs_v1/agent_variants_sample.md），按 rubric_v1.md 三维度判定",
@@ -30,7 +30,7 @@
     "status": "completed",
     "date": "2026-09-19",
     "model": "GLM（ZCode CLI 内置模型）",
-    "skill_version": "0.1.0",
+    "skill_version": "0.2.0",
     "environment": {
       "os": "macOS 25.5.0 arm64 (Darwin)",
       "python": "3.13",
@@ -44,8 +44,17 @@
       "runs_v1/ledger_schedule.csv",
       "runs_v1/ledger_summary.json",
       "runs_v1/all_losers_report.md",
+      "runs_v1/all_losers_schedule.csv",
+      "runs_v1/all_losers_summary.json",
       "runs_v1/cold_start_report.md",
+      "runs_v1/cold_start_summary.json",
       "runs_v1/determinism_sha256.txt",
+      "runs_v1/metric_total_report.md",
+      "runs_v1/metric_total.csv",
+      "runs_v1/metric_total_summary.json",
+      "runs_v1/metric_perday_report.md",
+      "runs_v1/metric_perday.csv",
+      "runs_v1/metric_perday_summary.json",
       "runs_v1/agent_variants_sample.md"
     ]
   }

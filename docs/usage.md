@@ -27,6 +27,7 @@ python3 scripts/build_schedule.py posts.csv --as-of 2026-09-19 \
 | `--min-percentile` | 75.0 | 赢家分位数下限 |
 | `--like-weight` | 2 | 互动量中点赞权重（互动量 = views + likes×2 + comments×3） |
 | `--comment-weight` | 3 | 互动量中评论权重 |
+| `--metric` | total | 赢家口径：`total`=累计互动量（v0.1.0 行为）；`per_day`=日均互动量 = 互动量 ÷ max(存活天数, 1)，修正老帖的累计优势；报告与 CSV 均标注所用口径 |
 | `--ledger` | 不读取 | 已再发记录 ledger.json，格式见 references/排期规则与字段.md |
 
 ## 退出码
@@ -47,10 +48,15 @@ python3 scripts/build_schedule.py posts.csv --as-of 2026-09-19 \
 ## 测试与评测
 
 ```bash
-python3 -m unittest discover tests     # 16 项单元测试
+python3 -m unittest discover tests     # 20 项单元测试
 python3 scripts/build_schedule.py evals/fixtures/posts_main_v1.csv \
     --as-of 2026-09-19 --ledger evals/fixtures/ledger_v1.json \
     -o /tmp/s.md --csv /tmp/s.csv --json /tmp/s.json
+# 赢家口径对照（同一夹具、两种口径选出不同赢家）：
+python3 scripts/build_schedule.py evals/fixtures/posts_metric_v1.csv \
+    --as-of 2026-09-19 --metric total -o /tmp/mt.md
+python3 scripts/build_schedule.py evals/fixtures/posts_metric_v1.csv \
+    --as-of 2026-09-19 --metric per_day -o /tmp/mpd.md
 ```
 
 完整评测流程与证据见 [evals/README.md](../evals/README.md)。
