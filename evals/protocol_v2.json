@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "suite": "evergreen-recycler-v2",
+  "case_file": "cases_v2.jsonl",
+  "rubric_file": "rubric_v2.md",
+  "layers": {
+    "script_behavior": {
+      "runner": "bash evals/scripts/run_v2.sh 生成 runs_v2/ 全部产物（--as-of 2026-09-19 固定），再由 python3 evals/scripts/check_v2.py 对产物自动复算 47 项原子检查，结果写入 runs_v2/check_results.json",
+      "runs_per_case": 1,
+      "note": "脚本是确定性的统计和排期，e7 校验两次运行三份输出的 sha256 一致；改前对照产物由 v0.2.0（commit 64b5c42）在改代码前实际运行生成，放在 runs_v2/before_v0.2.0/"
+    },
+    "agent_workflow": {
+      "runner": "Claude Code 中的 Agent（Claude Opus 5.5）按 SKILL.md 第 3-4 步处理 runs_v2/logic_schedule.md，产物 runs_v2/agent_variants_sample_v2.md，按 rubric_v2.md 四维度判定",
+      "runs_per_case": 1
+    }
+  },
+  "conditions": ["skill"],
+  "baseline_note": "无 baseline 条件：对照对象是同一输入下的上一版本 v0.2.0（见 runs_v2/before_after.md），不是无 Skill 的人工流程。",
+  "judging": {
+    "judge": "脚本层由 check_v2.py 自动判定；Agent 层由开发 Agent 自评，review_status=model_only",
+    "blind_condition_labels": false,
+    "human_review": "尚未独立人工复核"
+  },
+  "pass_rule": {
+    "critical_failure_must_be_true": false,
+    "script_layer": "全部 required 原子检查通过且无 forbidden 命中",
+    "agent_layer_minimum_mean_dimension_score": 3.0
+  },
+  "current_run": {
+    "status": "completed",
+    "date": "2026-11-02",
+    "model": "Claude Opus 5.5（Claude Code）",
+    "skill_version": "0.3.0",
+    "environment": {
+      "os": "macOS (Darwin 25.2.0)",
+      "python": "3.12",
+      "network": "脚本层离线；调研阶段联网（WebSearch/WebFetch/GitHub API），检索日期 2026-11-02"
+    },
+    "data_note": "全部夹具为合成样本；没有真实账号数据，未在真实账号上验证翻红效果"
+  }
+}

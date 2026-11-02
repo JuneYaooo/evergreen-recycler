@@ -1,39 +1,48 @@
-# 评测（Evals V1.1）
+# 评测（Evals V2，v0.3.0）
 
-本目录保存 evergreen-recycler 的行为证据：题集、量表、运行协议、真实产物与逐题判断。
+本目录保存 evergreen-recycler 的行为证据：题集、量表、运行协议、真实产物、改前改后对照和逐题判断。
+V1（v0.1.0–v0.2.0）的材料原样保留，用来追溯历史。
+
+## 当前状态（2026-11-02，v0.3.0）
+
+- **18/18 用例通过，0 硬失败**：脚本层 17 个用例共 **47/47 项原子检查**由
+  [scripts/check_v2.py](scripts/check_v2.py) 对真实产物自动复算（结果见
+  [runs_v2/check_results.json](runs_v2/check_results.json)）；Agent 层 1 个用例按量表自评。
+  单元测试 30/30 通过。
+- 逐题判断：[judgments_v2.jsonl](judgments_v2.jsonl)；汇总：[summary_v2.json](summary_v2.json)
+  （由 [scripts/aggregate_results.py](scripts/aggregate_results.py) 从逐题判断生成，
+  通过率 Wilson 95% 区间 [0.82, 1.00]）。
+- 题集 [cases_v2.jsonl](cases_v2.jsonl)、量表 [rubric_v2.md](rubric_v2.md)、协议 [protocol_v2.json](protocol_v2.json)。
 
 ## 评测分层
 
-1. **脚本行为层**：对 [fixtures/](fixtures/README.md) 的合成夹具运行
-   `scripts/build_schedule.py`（日期基准统一 `--as-of 2026-09-19`），逐条核对
-   [cases_v1.jsonl](cases_v1.jsonl) 的 required/forbidden 原子检查，共 46 项
-   （脚本为确定性统计与排期，case e7 显式验证两次运行三份输出 sha256 一致，
-   case e10 验证累计/日均两种赢家口径选出不同赢家）。
-2. **Agent 工作流层**：Agent 按 SKILL.md 第 4 步对排期表逐条填写理由位与文案变体方向，
-   产物见 [runs_v1/agent_variants_sample.md](runs_v1/agent_variants_sample.md)，
-   按 [rubric_v1.md](rubric_v1.md) 三维度判定。
+1. **脚本行为层**：对 [fixtures/](fixtures/README.md) 的合成夹具运行 `scripts/build_schedule.py`
+   （基准日统一 2026-09-19），复现命令在 [scripts/run_v2.sh](scripts/run_v2.sh)。e1–e10 沿用 V1 用例；
+   其中 e2、e9、e10 按 v0.3.0 的新约束更新了期望。e11–e17 是本轮针对调研发现的问题新增的回归用例：
+   录错日期、新帖冷却、收藏/转发、滚动基线、`--min-sample` 贯通、时效提示、互动全空。
+2. **Agent 工作流层**：Agent 按 SKILL.md 第 3-4 步处理脚本信号并填写理由与变体方向，
+   产物 [runs_v2/agent_variants_sample_v2.md](runs_v2/agent_variants_sample_v2.md)。
 
-## 当前状态（2026-09-19，v0.2.0）
+## 改前 / 改后对照
 
-- **10/10 用例通过，0 硬失败，46/46 原子检查通过，20/20 单元测试通过**；逐题判断见
-  [judgments_v1.jsonl](judgments_v1.jsonl)，汇总见 [summary_v1.json](summary_v1.json)
-  （均值：理解 3.7 / 真实效果 4.0 / 迭代 3.5 / 评测 3.9 / 展示诚信 3.4，0–4 分制）。
-- 覆盖：赢家检测（是否落在设计的高互动帖；含累计/日均口径对照）、排期约束（7 天滚动
-  上限/1 天间隔/60 天再发间隔）、稀疏平台降级、ledger 防重复、全输家诚实空结果、
-  冷启动建议、确定性 sha256、缺字段容忍、变体红线十类行为。
-- 真实产物与哈希：[runs_v1/](runs_v1/)（主夹具排期表/CSV/JSON、ledger 对照、
-  全输家、冷启动、两次确定性运行、口径对照两跑、Agent 变体填写示例）。
-- 夹具全部为合成样本（见 [fixtures/README.md](fixtures/README.md)），账号、标题、
-  链接、数据均为虚构。
-- **版本说明**：V1 首轮（v0.1.0，2026-09-19）为 9 用例；v0.2.0 新增 `--metric
-  per_day` 日均口径后复跑并新增 e10，历史数字（9/9、32 项原子检查）为当时记录——
-  首轮文档把原子检查总数误写为 32，经复核 cases_v1.jsonl 实为 41 项，本次一并修正
-  （见 [iteration_notes.md](iteration_notes.md) 迭代 5）。
-- **已知限制**：判定为开发 Agent 自评（model_only），未独立人工复核；夹具是"赢家
-  是否落在设计高互动帖"的构造性验证，不等于真实账号上的翻红效果（后者需要真实
-  发布后的回流数据）。
+同一输入下 v0.2.0 与 v0.3.0 的差异见 [runs_v2/before_after.md](runs_v2/before_after.md)。要点：
 
-## 复现
+- 逻辑夹具上，v0.2.0 排出的 4 条里有 2 条是错的：一条发布日期录错（距首发 -16 天），
+  一条发布才 18 天。v0.3.0 跳过前者、把后者放进待定，并找回了收藏型干货。
+- 旧主夹具上，排期的日期、平台、帖子逐行不变，默认参数向后兼容。
 
-命令与参数见 [docs/usage.md](../docs/usage.md)；脚本层全程离线，无需任何 API 密钥。
-多轮缺陷与修复（含口径归一改进）见 [iteration_notes.md](iteration_notes.md)。
+## 已知限制
+
+- 全部夹具是合成样本，**没有在真实账号上验证翻红效果**；评测验证的是「规则是否按设计执行」，
+  不是「翻红后流量会涨」。
+- Agent 层判定是开发 Agent 自评（model_only），没有独立人工复核。
+- 没有「无 Skill」baseline 条件，对照对象是上一版本 v0.2.0。
+
+## V1 历史材料
+
+[cases_v1.jsonl](cases_v1.jsonl)、[rubric_v1.md](rubric_v1.md)、[protocol_v1.json](protocol_v1.json)、
+[judgments_v1.jsonl](judgments_v1.jsonl)、[summary_v1.json](summary_v1.json)、[runs_v1/](runs_v1/)：
+v0.2.0 时期 10/10 用例、46 项原子检查（GLM / ZCode CLI 自评）。V1 的 e9 期望里包含
+「小红书 180 天内容指纹」，本轮查不到官方出处，已在 V2 改为禁止项。
+
+缺陷与修复的完整过程见 [iteration_notes.md](iteration_notes.md)。

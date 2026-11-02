@@ -4,7 +4,7 @@ import json
 import sys
 import tempfile
 import unittest
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -265,13 +265,17 @@ class RunTests(unittest.TestCase):
         self.assertEqual(default["scheduled_posts"], ["old_high"])
         self.assertEqual(total["scheduled_posts"], ["old_high"])
         self.assertEqual(per_day["params"]["metric"], "per_day")
-        self.assertEqual(per_day["scheduled_posts"], ["new_fast"])
+        # v0.3.0：new_fast 仍是日均口径的唯一赢家，但发布仅 7 天、距首发不足 60 天，
+        # 进入待定而不是立即「翻红」（v0.2.0 会在发布第 8 天就排它再发）
+        self.assertEqual(per_day["scheduled_posts"], [])
+        self.assertEqual([b["post_id"] for b in per_day["backlog"]], ["new_fast"])
+        self.assertIn("距首发不足 60 天", per_day["backlog"][0]["reason"])
 
         self.assertIn("累计互动量", md_total.read_text(encoding="utf-8"))
         report_day = md_day.read_text(encoding="utf-8")
         self.assertIn("日均互动量", report_day)
+        self.assertIn("new_fast", report_day.replace("新帖", "new_fast"))
         self.assertNotIn("old_high", csv_day.read_text(encoding="utf-8"))
-        self.assertIn("日均", csv_day.read_text(encoding="utf-8"))
 
     def test_determinism_same_bytes(self):
         import hashlib
@@ -287,6 +291,134 @@ class RunTests(unittest.TestCase):
                 hashlib.sha256(out_csv.read_bytes()).hexdigest(),
             ))
         self.assertEqual(digests[0], digests[1])
+
+
+class V030LogicTests(unittest.TestCase):
+    """v0.3.0 逻辑改进：每项都有调研依据，见 references/benchmarks.md 与 evals/iteration_notes.md。"""
+
+    def _write(self, content, suffix=".csv", name="f"):
+        tmp = Path(tempfile.mkdtemp())
+        path = tmp / f"{name}{suffix}"
+        path.write_text(content, encoding="utf-8")
+        return path
+
+    def test_first_publish_counts_toward_recycle_gap(self):
+        young = make_post(post_id="young", publish_date=date(2026, 9, 1))
+        scheduled, backlog = bs.build_schedule([winner_item(young)], {}, date(2026, 9, 20),
+                                               weeks=4, weekly_cap=3, min_gap_days=1,
+                                               recycle_gap_days=60)
+        self.assertEqual(scheduled, [])
+        self.assertIn("距首发不足 60 天", backlog[0]["reason"])
+        self.assertIn("2026-10-31", backlog[0]["reason"])
+        # 首发满 60 天后可以落在规划期内：排在 publish+60
+        mid = make_post(post_id="mid", publish_date=date(2026, 7, 30))
+        scheduled, _ = bs.build_schedule([winner_item(mid)], {}, date(2026, 9, 20),
+                                         weeks=4, weekly_cap=3, min_gap_days=1,
+                                         recycle_gap_days=60)
+        self.assertEqual(scheduled[0]["planned_date"], date(2026, 9, 28))
+        self.assertEqual(scheduled[0]["days_since_first_publish"], 60)
+
+    def test_future_dated_rows_skipped(self):
+        csv_text = ("platform,post_id,title,url,publish_date,views,likes,comments\n"
+                    "xiaohongshu,ok,帖子,,2026-09-01,1000,1,1\n"
+                    "xiaohongshu,future,录错日期,,2026-10-05,99999,1,1\n")
+        posts, health = bs.load_posts(self._write(csv_text), as_of=AS_OF)
+        self.assertEqual([p["post_id"] for p in posts], ["ok"])
+        self.assertEqual(health["skipped"], {"发布日期晚于基准日": 1})
+        # 不传 as_of 时保持 v0.2.0 的宽松行为（库函数向后兼容）
+        posts, _ = bs.load_posts(self._write(csv_text))
+        self.assertEqual(len(posts), 2)
+
+    def test_all_blank_metrics_excluded_from_baseline(self):
+        posts = [make_post(post_id=f"n{i}", views=1000, likes=0, comments=0) for i in range(10)]
+        posts.append(make_post(post_id="hot", views=3200, likes=0, comments=0))
+        blanks = [make_post(post_id=f"blank{i}", views=0, likes=0, comments=0,
+                            missing_metrics=["views", "likes", "comments"], no_metrics=True)
+                  for i in range(10)]
+        # 若把 10 行全空当 0 计，中位数被压到 1000 以下的位置，hot 之外的普通帖也会"变成"赢家
+        winners = bs.detect_winners(posts + blanks, 2, 3, 3.0, 75.0, 10)
+        self.assertEqual([w["post"]["post_id"] for w in winners], ["hot"])
+        self.assertAlmostEqual(winners[0]["multiple"], 3.2)
+
+    def test_saves_and_shares_columns_counted(self):
+        mapping = bs.normalize_columns(["平台", "笔记id", "发布日期", "阅读量", "点赞", "评论", "收藏", "转发"])
+        self.assertEqual(mapping["saves"], "收藏")
+        self.assertEqual(mapping["shares"], "转发")
+        post = make_post(views=1000, likes=100, comments=10, saves=50, shares=5)
+        self.assertEqual(bs.engagement(post, 2, 3), 1000 + 200 + 30 + 100 + 15)
+        # 没有收藏/转发列的帖子（v0.2.0 输入）互动量不变
+        self.assertEqual(bs.engagement(make_post(), 2, 3), 1000 + 200 + 30)
+
+    def test_rolling_baseline_handles_account_growth(self):
+        # 账号前 16 条互动 ~800，后 14 条 ~3200（体量涨 4 倍）；早期一条 3000 是同期 3.75x
+        posts = [make_post(post_id=f"a{i:02d}", publish_date=date(2025, 1, 6) + timedelta(days=14 * i),
+                           views=800, likes=0, comments=0) for i in range(16)]
+        posts += [make_post(post_id=f"b{i:02d}", publish_date=date(2026, 1, 5) + timedelta(days=14 * i),
+                            views=3200, likes=0, comments=0) for i in range(14)]
+        posts.append(make_post(post_id="early_star", publish_date=date(2025, 5, 12),
+                               views=3000, likes=0, comments=0))
+        platform = bs.detect_winners(posts, 2, 3, 3.0, 75.0, 10, as_of=AS_OF)
+        rolling = bs.detect_winners(posts, 2, 3, 3.0, 75.0, 10, as_of=AS_OF,
+                                    baseline="rolling", rolling_window=20)
+        # 全量基线中位数落在早期 800：后期 14 条普通帖全部"跑赢 4 倍"（涨粉造成的假赢家），
+        # 真正跑赢同期的 early_star 反而因 3000 < 后期普通帖而落选
+        self.assertEqual(sorted(w["post"]["post_id"] for w in platform),
+                         [f"b{i:02d}" for i in range(14)])
+        self.assertEqual([w["post"]["post_id"] for w in rolling], ["early_star"])
+        self.assertEqual(rolling[0]["baseline"], "rolling")
+        self.assertGreaterEqual(bs.baseline_drift(posts), 2.0)
+
+    def test_rolling_baseline_validation(self):
+        with self.assertRaises(ValueError):
+            bs.detect_winners([make_post()], 2, 3, 3.0, 75.0, 10, baseline="weekly")
+        with self.assertRaises(ValueError):
+            bs.detect_winners([make_post()], 2, 3, 3.0, 75.0, 10, baseline="rolling",
+                              rolling_window=2)
+
+    def test_max_recycles_cap(self):
+        post = make_post(post_id="veteran")
+        ledger = {"veteran": [date(2025, 10, 1), date(2026, 1, 1), date(2026, 4, 1)]}
+        scheduled, backlog = bs.build_schedule([winner_item(post)], ledger, date(2026, 9, 20),
+                                               weeks=4, weekly_cap=3, min_gap_days=1,
+                                               recycle_gap_days=60, max_recycles=3)
+        self.assertEqual(scheduled, [])
+        self.assertIn("--max-recycles 3", backlog[0]["reason"])
+        scheduled, _ = bs.build_schedule([winner_item(post)], ledger, date(2026, 9, 20),
+                                         weeks=4, weekly_cap=3, min_gap_days=1,
+                                         recycle_gap_days=60)  # 默认 0=不限
+        self.assertEqual(len(scheduled), 1)
+
+    def test_custom_min_sample_used_in_reason(self):
+        post = make_post(post_id="sparse")
+        _, backlog = bs.build_schedule([winner_item(post, degraded=True)], {}, date(2026, 9, 20),
+                                       weeks=1, weekly_cap=3, min_gap_days=1,
+                                       recycle_gap_days=60, min_sample=15)
+        self.assertIn("不足 15 条", backlog[0]["reason"])
+
+    def test_time_sensitive_hint(self):
+        self.assertEqual(bs.time_sensitive_hint("2025 双十一囤货清单"), "2025")
+        self.assertEqual(bs.time_sensitive_hint("春节回家必带清单"), "春节")
+        self.assertEqual(bs.time_sensitive_hint("毕业五年存下第一个十万"), "")
+        self.assertEqual(bs.time_sensitive_hint("存下2000元的方法"), "")
+
+    def test_logic_fixture_end_to_end(self):
+        fixture = Path(__file__).resolve().parents[1] / "evals" / "fixtures" / "posts_logic_v2.csv"
+        out = Path(tempfile.mkdtemp())
+        self.assertEqual(bs.run([str(fixture), "--as-of", "2026-09-19", "-o", str(out / "s.md"),
+                                 "--csv", str(out / "s.csv"), "--json", str(out / "s.json")]), 0)
+        summary = json.loads((out / "s.json").read_text(encoding="utf-8"))
+        report = (out / "s.md").read_text(encoding="utf-8")
+        self.assertEqual(summary["data_health"]["skipped"], {"发布日期晚于基准日": 1})
+        self.assertNotIn("xg_future", summary["scheduled_posts"])
+        self.assertNotIn("xg_young_hot", summary["scheduled_posts"])
+        self.assertIn("xg_young_hot", [b["post_id"] for b in summary["backlog"]])
+        self.assertIn("xg_saves_star", summary["scheduled_posts"])
+        self.assertIn("疑似时效", report)
+        self.assertIn("基线漂移", report)
+        rolling = out / "r.json"
+        self.assertEqual(bs.run([str(fixture), "--as-of", "2026-09-19", "--baseline", "rolling",
+                                 "-o", str(out / "r.md"), "--json", str(rolling)]), 0)
+        self.assertIn("xg_early_star", json.loads(rolling.read_text(encoding="utf-8"))["scheduled_posts"])
 
 
 if __name__ == "__main__":

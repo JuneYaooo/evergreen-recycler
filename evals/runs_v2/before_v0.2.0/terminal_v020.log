@@ -1,0 +1,12 @@
+$ python3 evergreen-recycler-v0.2.0/scripts/build_schedule.py evergreen-recycler/evals/fixtures/posts_logic_v2.csv --as-of 2026-09-19 -o out/before.md --csv out/before.csv
+$ awk '/^## 数据体检/{f=1;next} /^## /{f=0} f&&NF' out/before.md
+- 有效帖子 46/46 行（跳过：无）
+- 平台分布：douyin 12 条 ｜ xiaohongshu 34 条
+- 1 行缺少播放/点赞/评论字段，按 0 计入统计（字段缺失容忍，但会影响该行竞争力）
+$ cut -d, -f1,3,6,13,15 out/before.csv
+﻿planned_date,post_id,publish_date,median_multiple,days_since_publish
+2026-09-20,dg_star,2026-03-20,4.27,183
+2026-09-20,xg_future,2026-10-05,8.65,-16
+2026-09-21,xg_young_hot,2026-09-01,6.87,18
+2026-09-22,xg_festival,2025-11-05,6.4,318
+$ awk '/^## 已标记/{f=1;next} /^## /{f=0} f&&NF' out/before.md

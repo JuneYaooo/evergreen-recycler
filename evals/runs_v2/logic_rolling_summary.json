@@ -1,0 +1,73 @@
+{
+  "version": "0.3.0",
+  "mode": "schedule",
+  "as_of": "2026-09-19",
+  "params": {
+    "weeks": 4,
+    "weekly_cap": 3,
+    "min_gap_days": 1,
+    "recycle_gap_days": 60,
+    "min_sample": 10,
+    "median_x": 3.0,
+    "min_percentile": 75.0,
+    "like_weight": 2,
+    "comment_weight": 3,
+    "metric": "total",
+    "baseline": "rolling",
+    "rolling_window": 20,
+    "save_weight": 2,
+    "share_weight": 3,
+    "max_recycles": 0,
+    "start_date": "2026-09-20"
+  },
+  "data_health": {
+    "total_rows": 46,
+    "valid_rows": 45,
+    "skipped": {
+      "发布日期晚于基准日": 1
+    },
+    "missing_metric_rows": 1,
+    "no_metric_rows": 1,
+    "extra_metric_columns": [
+      "saves",
+      "shares"
+    ]
+  },
+  "platforms": [
+    {
+      "platform": "douyin",
+      "posts": 12,
+      "degraded": false,
+      "median_engagement": 5680.0,
+      "median_metric_value": 5680.0,
+      "baseline_drift_ratio": 1.0,
+      "winner_count": 1,
+      "scheduled_count": 1
+    },
+    {
+      "platform": "xiaohongshu",
+      "posts": 33,
+      "degraded": false,
+      "median_engagement": 1852.5,
+      "median_metric_value": 1852.5,
+      "baseline_drift_ratio": 4.0,
+      "winner_count": 4,
+      "scheduled_count": 3
+    }
+  ],
+  "scheduled_count": 4,
+  "backlog_count": 1,
+  "scheduled_posts": [
+    "dg_star",
+    "xg_early_star",
+    "xg_festival",
+    "xg_saves_star"
+  ],
+  "backlog": [
+    {
+      "post_id": "xg_young_hot",
+      "platform": "xiaohongshu",
+      "reason": "距首发不足 60 天（2026-09-01 发布，可能仍在自然流量期），最早可排 2026-10-31，超出本规划期"
+    }
+  ]
+}

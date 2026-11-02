@@ -1,0 +1,87 @@
+{
+  "e1-winner-detection": {
+    "passed": 3,
+    "total": 3,
+    "failed": []
+  },
+  "e2-schedule-constraints": {
+    "passed": 3,
+    "total": 3,
+    "failed": []
+  },
+  "e3-sparse-platform-degraded": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  },
+  "e4-ledger-recycle-gap": {
+    "passed": 3,
+    "total": 3,
+    "failed": []
+  },
+  "e5-all-losers-honest-empty": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  },
+  "e6-cold-start": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  },
+  "e7-determinism": {
+    "passed": 1,
+    "total": 1,
+    "failed": []
+  },
+  "e8-missing-field-tolerance": {
+    "passed": 3,
+    "total": 3,
+    "failed": []
+  },
+  "e9-variant-redline": {
+    "passed": 6,
+    "total": 6,
+    "failed": []
+  },
+  "e10-metric-per-day": {
+    "passed": 4,
+    "total": 4,
+    "failed": []
+  },
+  "e11-future-date-skipped": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  },
+  "e12-young-winner-cooldown": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  },
+  "e13-saves-shares": {
+    "passed": 3,
+    "total": 3,
+    "failed": []
+  },
+  "e14-rolling-baseline": {
+    "passed": 4,
+    "total": 4,
+    "failed": []
+  },
+  "e15-min-sample-param": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  },
+  "e16-time-sensitive-hint": {
+    "passed": 3,
+    "total": 3,
+    "failed": []
+  },
+  "e17-blank-metrics": {
+    "passed": 2,
+    "total": 2,
+    "failed": []
+  }
+}

@@ -1,0 +1,5 @@
+﻿planned_date,platform,post_id,title,url,publish_date,views,likes,comments,engagement,metric,metric_value,median_multiple,percentile_rank,days_since_publish,days_since_previous,reason_hint,variant_direction,status,baseline,saves,shares,time_sensitive_hint
+2026-09-20,douyin,dg_star,老房子水电改造避坑全记录,https://example.com/dg_star,2026-03-20,21000,900,260,24540,total,24540,4.32,100.0,183,,4.32x 累计基线 · P100.0,,pending,rolling,300,120,
+2026-09-20,xiaohongshu,xg_early_star,早期爆款：一张表管住全年预算,https://example.com/xg_early_star,2025-05-12,2200,150,40,2920,total,2920,3.72,81.0,495,,3.72x 累计基线 · P81.0,,pending,rolling,120,20,
+2026-09-21,xiaohongshu,xg_festival,2025 双十一囤货清单：这些真的值得买,https://example.com/xg_festival,2025-11-05,9000,600,150,11630,total,11630,3.7,100.0,318,,3.7x 累计基线 · P100.0,,pending,rolling,400,60,2025
+2026-09-22,xiaohongshu,xg_saves_star,收藏型干货：租房合同逐条避坑,https://example.com/xg_saves_star,2026-03-16,2400,160,40,10040,total,10040,3.2,90.5,187,,3.2x 累计基线 · P90.5,,pending,rolling,3000,400,

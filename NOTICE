@@ -6,11 +6,14 @@ post recycling scheduler, and evaluation artifacts released under the
 Apache License, Version 2.0.
 
 Products named in references/benchmarks.md (CoSchedule ReQueue,
-ContentStudio, SmarterQueue, Postiz, social-auto-upload, etc.) identify
+ContentStudio, SmarterQueue, Revive Old Posts, vidIQ, OutlierKit, Postiz,
+social-auto-upload, etc.) identify
 sources of design lessons only. Those products and any third-party
 materials remain subject to their own terms; nothing from them is
-redistributed in this repository. Platform rule descriptions (such as
-Xiaohongshu's 180-day content fingerprint) reflect public discussions at
-the research date (2026-09-19) and may change without notice. All
+redistributed in this repository. Platform rule descriptions reflect
+public reports at the research dates (2026-09-19, re-checked 2026-11-02)
+and may change without notice; the widely repeated "Xiaohongshu 180-day
+content fingerprint" claim could not be traced to an official source and
+is no longer stated as fact. All
 evaluation fixtures are synthetic; any resemblance to real accounts is
 coincidental.

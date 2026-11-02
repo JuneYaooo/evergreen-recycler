@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "mode": "schedule",
+  "as_of": "2026-09-19",
+  "params": {
+    "weeks": 4,
+    "weekly_cap": 3,
+    "min_gap_days": 1,
+    "recycle_gap_days": 60,
+    "min_sample": 10,
+    "median_x": 3.0,
+    "min_percentile": 75.0,
+    "like_weight": 2,
+    "comment_weight": 3,
+    "metric": "total",
+    "start_date": "2026-09-20"
+  },
+  "data_health": {
+    "total_rows": 46,
+    "valid_rows": 46,
+    "skipped": {},
+    "missing_metric_rows": 1
+  },
+  "platforms": [
+    {
+      "platform": "douyin",
+      "posts": 12,
+      "degraded": false,
+      "median_engagement": 5520.0,
+      "median_metric_value": 5520.0,
+      "winner_count": 1,
+      "scheduled_count": 1
+    },
+    {
+      "platform": "xiaohongshu",
+      "posts": 34,
+      "degraded": false,
+      "median_engagement": 1665.0,
+      "median_metric_value": 1665.0,
+      "winner_count": 3,
+      "scheduled_count": 3
+    }
+  ],
+  "scheduled_count": 4,
+  "backlog_count": 0,
+  "scheduled_posts": [
+    "dg_star",
+    "xg_future",
+    "xg_young_hot",
+    "xg_festival"
+  ],
+  "backlog": []
+}

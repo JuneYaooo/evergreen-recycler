@@ -1,0 +1,5 @@
+﻿planned_date,platform,post_id,title,url,publish_date,views,likes,comments,engagement,metric,metric_value,median_multiple,percentile_rank,days_since_publish,days_since_previous,reason_hint,variant_direction,status
+2026-09-20,douyin,dg_star,老房子水电改造避坑全记录,https://example.com/dg_star,2026-03-20,21000,900,260,23580,total,23580,4.27,100.0,183,,4.27x 累计基线 · P100.0,,pending
+2026-09-20,xiaohongshu,xg_future,日期录错的帖子（发布日写成十月）,https://example.com/xg_future,2026-10-05,12000,900,200,14400,total,14400,8.65,100.0,-16,,8.65x 累计基线 · P100.0,,pending
+2026-09-21,xiaohongshu,xg_young_hot,刚发两周就爆的：小户型洗衣机选购,https://example.com/xg_young_hot,2026-09-01,9500,700,180,11440,total,11440,6.87,97.1,18,,6.87x 累计基线 · P97.1,,pending
+2026-09-22,xiaohongshu,xg_festival,2025 双十一囤货清单：这些真的值得买,https://example.com/xg_festival,2025-11-05,9000,600,150,10650,total,10650,6.4,94.1,318,,6.4x 累计基线 · P94.1,,pending
