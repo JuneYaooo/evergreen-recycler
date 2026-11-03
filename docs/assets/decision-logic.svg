@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900" role="img" aria-labelledby="t d">
+  <title id="t">关键判断逻辑</title>
+  <desc id="d">三张图解：一，赢家要同时跨过账号中位数 3 倍线和前 25% 两道门槛，用一次真实运行里小红书 33 条帖子的互动量演示，并标出基线漂移和被埋没的早期爆款；二，同帖距上次发布不足 60 天时进冷却沙漏；三，每个平台任意 7 天最多 3 条，第 4 条顺延。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7FAF5"/><stop offset="1" stop-color="#E4EFE7"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFE1A6" stop-opacity="0.5"/><stop offset="1" stop-color="#FFE1A6" stop-opacity="0"/></radialGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#1F5C44" fill-opacity="0.08"/></pattern>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3" height="7" fill="#FFFFFF" fill-opacity="0.45"/></pattern>
+    <pattern id="coolStripe" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#FFF1D6"/><rect width="4" height="10" fill="#FFE2A8"/></pattern>
+    <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC45A"/><stop offset="1" stop-color="#EE9A2E"/></linearGradient>
+    <linearGradient id="amberSoft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD58A"/><stop offset="1" stop-color="#F3B562"/></linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB6C2"/><stop offset="1" stop-color="#2A8C9A"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E8A62"/><stop offset="1" stop-color="#1F5C44"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0F3B28" flood-opacity="0.12"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0F3B28" flood-opacity="0.10"/>
+    </filter>
+    <filter id="shadowSm" x="-30%" y="-40%" width="160%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0F3B28" flood-opacity="0.15"/></filter>
+    <clipPath id="frame"><rect width="1280" height="900" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="1280" height="900" fill="url(#bg)"/>
+    <rect width="1280" height="900" fill="url(#dots)"/>
+    <circle cx="80" cy="40" r="240" fill="url(#glow)"/>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="899" rx="27.5" fill="none" stroke="#1F5C44" stroke-opacity="0.12"/>
+
+  <g font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+    <text x="46" y="64" font-size="30" font-weight="800" fill="#143D2B">关键判断逻辑</text>
+    <text x="246" y="63" font-size="16" fill="#4F6B5D">挑谁、什么时候能发、排多密，三条规则都写在脚本里</text>
+
+    <!-- ================= PANEL A ================= -->
+    <rect x="46" y="96" width="1188" height="420" rx="22" fill="#FFFFFF" filter="url(#shadow)"/>
+    <circle cx="80" cy="132" r="16" fill="#E8961F"/><text x="80" y="138" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">A</text>
+    <text x="106" y="140" font-size="21" font-weight="800" fill="#143D2B">挑谁：拿量尺只和自己比</text>
+    <text x="106" y="164" font-size="13.5" fill="#5F7A6D">一次真实运行里小红书的 33 条帖子，按发布先后排开，柱高 = 互动量</text>
+
+    <!-- era bands -->
+    <rect x="86" y="186" width="410" height="266" rx="10" fill="#F3F7F4"/>
+    <rect x="518" y="186" width="362" height="266" rx="10" fill="#EEF6F1"/>
+
+    <!-- threshold lines -->
+    <line x1="84" y1="351.1" x2="884" y2="351.1" stroke="#E2634A" stroke-width="2" stroke-dasharray="7 5"/>
+    <line x1="84" y1="395.0" x2="884" y2="395.0" stroke="#3E7FA6" stroke-width="1.6" stroke-dasharray="4 4"/>
+    <line x1="84" y1="418.4" x2="884" y2="418.4" stroke="#7C9387" stroke-width="1.6" stroke-dasharray="2 4"/>
+    <g font-size="12" font-weight="700">
+      <text x="92" y="343.1" fill="#D2563F">3 倍线 · 5557.5</text>
+      <text x="92" y="389.0" fill="#3E7FA6">P75 · 3140</text>
+      <text x="184" y="434.4" fill="#5F7A6D" font-weight="600">中位数 · 1852.5</text>
+    </g>
+    <rect x="92" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="116" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="140" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="164" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="188" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="212" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="236" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="260" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="284" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="308" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="332" y="399.0" width="16" height="53.0" rx="4" fill="url(#teal)"/><rect x="356" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="380" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="404" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="428" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="452" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="476" y="437.7" width="16" height="14.3" rx="4" fill="#CFE0D5"/><rect x="500" y="240.9" width="16" height="211.1" rx="4" fill="url(#amber)"/><rect x="524" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="548" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="572" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="596" y="412" width="16" height="40" rx="4" fill="none" stroke="#9FB3A8" stroke-width="1.5" stroke-dasharray="3 3"/><text x="604.0" y="406" font-size="11" fill="#7C9387" text-anchor="middle">空</text><rect x="620" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="644" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="668" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="692" y="269.7" width="16" height="182.3" rx="4" fill="url(#amber)"/><rect x="716" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="740" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="764" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="788" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="812" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="836" y="395.0" width="16" height="57.0" rx="4" fill="#A9CDB8"/><rect x="860" y="221.8" width="16" height="230.2" rx="4" fill="url(#amberSoft)"/><rect x="860" y="221.8" width="16" height="230.2" rx="4" fill="url(#hatch)"/>
+    <line x1="84" y1="452" x2="884" y2="452" stroke="#B9C9BF" stroke-width="1.5"/>
+
+    <!-- era labels -->
+    <g font-size="12.5" fill="#5F7A6D">
+      <text x="92" y="474">早期：多数帖子互动 785</text>
+      <text x="524" y="474">后期：多数帖子互动 3140</text>
+    </g>
+    <g transform="translate(278 460)">
+      <rect width="146" height="22" rx="11" fill="#FFF1D6"/>
+      <text x="73" y="15.5" font-size="12" font-weight="700" fill="#9A5B0E" text-anchor="middle">体量差 4 倍 · 基线漂移</text>
+    </g>
+
+    <!-- callouts -->
+    <g font-size="12.5">
+      <!-- festival -->
+      <g transform="translate(430.0 186.87076923076924)" filter="url(#shadowSm)">
+        <rect width="156" height="44" rx="10" fill="#FFFFFF" stroke="#F2C27A"/>
+        <text x="78" y="19" font-weight="800" fill="#9A5B0E" text-anchor="middle">双十一清单 6.28×</text>
+        <text x="78" y="36" fill="#B7543F" text-anchor="middle">⚠ 标题带年份，先确认</text>
+      </g>
+      <!-- saves -->
+      <g transform="translate(514.0 291.7)" filter="url(#shadowSm)">
+        <rect width="166" height="44" rx="10" fill="#FFFFFF" stroke="#F2C27A"/>
+        <path d="M166 16 L174 22 L166 28" fill="#FFFFFF" stroke="#F2C27A"/>
+        <text x="83" y="19" font-weight="800" fill="#9A5B0E" text-anchor="middle">租房合同 5.42×</text>
+        <text x="83" y="36" fill="#5F7A6D" text-anchor="middle">收藏 3000 &gt; 阅读 2400</text>
+      </g>
+      <!-- young -->
+      <g transform="translate(726.0 225.8)" filter="url(#shadowSm)">
+        <rect width="122" height="44" rx="10" fill="#FFFFFF" stroke="#F2C27A"/>
+        <path d="M122 16 L130 22 L122 28" fill="#FFFFFF" stroke="#F2C27A"/>
+        <text x="61" y="19" font-weight="800" fill="#9A5B0E" text-anchor="middle">洗衣机 6.84×</text>
+        <text x="61" y="36" fill="#5F7A6D" text-anchor="middle">刚发 18 天，冷却中</text>
+      </g>
+      <!-- early star -->
+      <path d="M340.0 393.0 C 340.0 359.0, 330.0 339.0, 330.0 300" stroke="#2A8C9A" stroke-width="1.8" fill="none" stroke-dasharray="3 3"/>
+      <circle cx="340.0" cy="393.0" r="3.5" fill="#2A8C9A"/>
+      <g transform="translate(94 206)" filter="url(#shadowSm)">
+        <rect width="262" height="94" rx="12" fill="#FFFFFF" stroke="#9ED5DB"/>
+        <text x="14" y="24" font-size="13.5" font-weight="800" fill="#1F6E79">早期爆款「一张表管住全年预算」</text>
+        <text x="14" y="46" fill="#3B5348">和全量中位数比只有 <tspan font-weight="800">1.58×</tspan>，被埋没</text>
+        <text x="14" y="66" fill="#3B5348">按同时期 20 条比是 <tspan font-weight="800" fill="#1F6E79">3.72×</tspan></text>
+        <text x="14" y="84" font-size="12" fill="#5F7A6D">漂移提示后加跑 --baseline rolling 找回</text>
+      </g>
+    </g>
+
+    <!-- right: gates -->
+    <g transform="translate(908 186)">
+      <text x="0" y="4" font-size="15" font-weight="800" fill="#143D2B">两道门槛，同时跨过才算赢家</text>
+      <g transform="translate(0 20)">
+        <rect width="296" height="56" rx="12" fill="#FDEDE8"/>
+        <circle cx="26" cy="28" r="14" fill="#E2634A"/><text x="26" y="33" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">1</text>
+        <text x="50" y="24" font-size="14" font-weight="700" fill="#9C3A26">互动量 ≥ 自身中位数 × 3</text>
+        <text x="50" y="44" font-size="12.5" fill="#7A4A3D">本例：≥ 5557.5</text>
+      </g>
+      <g transform="translate(0 84)">
+        <rect width="296" height="56" rx="12" fill="#E6F0F7"/>
+        <circle cx="26" cy="28" r="14" fill="#3E7FA6"/><text x="26" y="33" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">2</text>
+        <text x="50" y="24" font-size="14" font-weight="700" fill="#24597A">排进本平台前 25%（≥ P75）</text>
+        <text x="50" y="44" font-size="12.5" fill="#3E6A8F">后期普通帖刚好压线，但过不了门槛 1</text>
+      </g>
+      <g transform="translate(0 150)">
+        <rect width="296" height="112" rx="12" fill="#F3F7F4" stroke="#DCE8E0"/>
+        <text x="14" y="24" font-size="13" font-weight="700" fill="#1F5C44">互动量怎么算</text>
+        <text x="14" y="46" font-size="12.5" fill="#3B5348">播放 + 赞×2 + 评×3 + 藏×2 + 转×3</text>
+        <text x="14" y="70" font-size="12" fill="#5F7A6D" font-family="'SF Mono','JetBrains Mono',Menlo,Consolas,monospace">2400+160×2+40×3+3000×2+400×3</text>
+        <text x="14" y="94" font-size="12.5" fill="#3B5348">= 10040，是中位数的 <tspan font-weight="800" fill="#9A5B0E">5.42 倍</tspan></text>
+      </g>
+    </g>
+
+    <!-- ================= PANEL B ================= -->
+    <rect x="46" y="540" width="578" height="324" rx="22" fill="#FFFFFF" filter="url(#shadow)"/>
+    <circle cx="80" cy="576" r="16" fill="#2E8A62"/><text x="80" y="582" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">B</text>
+    <text x="106" y="584" font-size="21" font-weight="800" fill="#143D2B">什么时候能发：60 天冷却</text>
+    <text x="106" y="608" font-size="13.5" fill="#5F7A6D">从上次发布算起（首发也算），横轴是距首发的天数</text>
+
+    <!-- hourglass -->
+    <g transform="translate(546 556)">
+      <rect x="-3" y="0" width="34" height="5" rx="2.5" fill="#7C9387"/>
+      <rect x="-3" y="51" width="34" height="5" rx="2.5" fill="#7C9387"/>
+      <path d="M0 5 H28 C28 18, 18 24, 14 28 C18 32, 28 38, 28 51 H0 C0 38, 10 32, 14 28 C10 24, 0 18, 0 5 Z" fill="#FFFFFF" stroke="#7C9387" stroke-width="1.8"/>
+      <path d="M5 11 H23 C21 18, 16 22, 14 24 C12 22, 7 18, 5 11 Z" fill="url(#amber)"/>
+      <path d="M4 48 C7 41, 12 39, 14 37 C16 39, 21 41, 24 48 Z" fill="url(#amber)"/>
+    </g>
+    <!-- track -->
+    <rect x="92.0" y="640" width="147.6" height="30" rx="8" fill="url(#coolStripe)"/>
+    <rect x="239.6" y="640" width="344.4" height="30" rx="8" fill="#E2F2E8"/>
+    <text x="165.8" y="660" font-size="13" font-weight="700" fill="#9A5B0E" text-anchor="middle">冷却期</text>
+    <text x="411.8" y="660" font-size="13" font-weight="700" fill="#1F7A52" text-anchor="middle">可以变体再发</text>
+    <line x1="239.6" y1="632" x2="239.6" y2="824" stroke="#1F5C44" stroke-width="2"/>
+    <rect x="213.6" y="620" width="52" height="20" rx="10" fill="#1F5C44"/>
+    <text x="239.6" y="634.5" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">第 60 天</text>
+    <g font-size="11.5" fill="#7C9387" text-anchor="middle">
+      <text x="92.0" y="842">0</text><text x="338.0" y="842">100</text><text x="552.0" y="842">187</text>
+    </g>
+    <line x1="92.0" y1="826" x2="584.0" y2="826" stroke="#DCE5DF" stroke-width="1.5"/>
+
+    <!-- post 1: young hot -->
+    <text x="92.0" y="700" font-size="13.5" font-weight="700" fill="#143D2B">洗衣机选购（6.84×）</text>
+    <rect x="92.0" y="710" width="44.3" height="14" rx="7" fill="#F3B562"/>
+    <rect x="136.3" y="710" width="68.9" height="14" rx="7" fill="#FFFFFF" stroke="#F3B562" stroke-dasharray="3 3"/>
+    <circle cx="136.3" cy="717" r="5" fill="#E8961F" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="251.6" y="722" font-size="12.5" fill="#9A5B0E">4 周规划期结束时才第 46 天 → <tspan font-weight="800">待定</tspan></text>
+    <text x="92.0" y="742" font-size="11.5" fill="#7C9387">已发 18 天</text>
+
+    <!-- post 2: saves star -->
+    <text x="92.0" y="774" font-size="13.5" font-weight="700" fill="#143D2B">租房合同避坑（5.42×）</text>
+    <rect x="92.0" y="784" width="460.0" height="14" rx="7" fill="#7FC7A0"/>
+    <circle cx="552.0" cy="791" r="5" fill="#1F7A52" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="540.0" y="814" font-size="12.5" fill="#1F7A52" text-anchor="end">已发 187 天 → 规划期第 2 天排上 ✓</text>
+
+    <!-- ================= PANEL C ================= -->
+    <rect x="648" y="540" width="586" height="324" rx="22" fill="#FFFFFF" filter="url(#shadow)"/>
+    <circle cx="682" cy="576" r="16" fill="#E2634A"/><text x="682" y="582" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">C</text>
+    <text x="708" y="584" font-size="21" font-weight="800" fill="#143D2B">排多密：7 天滑窗最多 3 条</text>
+    <text x="708" y="608" font-size="13.5" fill="#5F7A6D">每个平台单独算；同平台同一天不排两条（规则示意）</text>
+
+    <!-- window frame -->
+    <rect x="694" y="666" width="354" height="62" rx="14" fill="none" stroke="#E2634A" stroke-width="2.4"/>
+    <rect x="694" y="644" width="96" height="22" rx="8" fill="#E2634A"/>
+    <text x="742" y="659.5" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">任意 7 天</text>
+    <rect x="700" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="721.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">1</text><rect x="750" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="771.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">2</text><rect x="800" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="821.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">3</text><rect x="850" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="871.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">4</text><rect x="900" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="921.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">5</text><rect x="950" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="971.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">6</text><rect x="1000" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="1021.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">7</text><rect x="1050" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="1071.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">8</text><rect x="1100" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="1121.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">9</text><rect x="1150" y="676" width="42" height="42" rx="10" fill="#F1F5F2"/><text x="1171.0" y="746" font-size="11.5" fill="#7C9387" text-anchor="middle">10</text>
+    <rect x="700" y="676" width="42" height="42" rx="10" fill="#E8604C"/><rect x="712" y="688" width="18" height="18" rx="4.5" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><rect x="800" y="676" width="42" height="42" rx="10" fill="#E8604C"/><rect x="812" y="688" width="18" height="18" rx="4.5" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><rect x="900" y="676" width="42" height="42" rx="10" fill="#E8604C"/><rect x="912" y="688" width="18" height="18" rx="4.5" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+    <!-- rejected candidate on day 6 -->
+    <rect x="950" y="676" width="42" height="42" rx="10" fill="#FFFFFF" stroke="#E2634A" stroke-width="1.6" stroke-dasharray="4 3"/>
+    <path d="M964 690 L978 704 M978 690 L964 704" stroke="#E2634A" stroke-width="2.6" stroke-linecap="round"/>
+    <!-- lands on day 8 -->
+    <rect x="1050" y="676" width="42" height="42" rx="10" fill="#F08A6E"/><rect x="1062" y="688" width="18" height="18" rx="4.5" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+    <path d="M971.0 756 C 971.0 784, 1071.0 784, 1071.0 762" stroke="#E2634A" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
+    <path d="M1065.0 766 L1071.0 756 L1077.0 766" stroke="#E2634A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="700" y="802" font-size="13" fill="#9C3A26">第 4 条想排第 6 天，往前 7 天已有 3 条 → <tspan font-weight="800">顺延到第 8 天</tspan></text>
+
+    <!-- small thresholds -->
+    <g transform="translate(672 816)" font-size="12.5">
+      <rect width="168" height="40" rx="10" fill="#F3F7F4"/>
+      <text x="12" y="25" fill="#3B5348">平台 &lt;10 条：<tspan font-weight="700">只标记</tspan></text>
+      <rect x="178" width="176" height="40" rx="10" fill="#F3F7F4"/>
+      <text x="190" y="25" fill="#3B5348">全账号 &lt;20 条：<tspan font-weight="700">先攒数据</tspan></text>
+      <rect x="364" width="174" height="40" rx="10" fill="#F3F7F4"/>
+      <text x="376" y="25" fill="#3B5348">没人过 3 倍：<tspan font-weight="700">如实说</tspan></text>
+    </g>
+  </g>
+</svg>
