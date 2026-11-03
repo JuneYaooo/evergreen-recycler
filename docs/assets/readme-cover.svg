@@ -1,25 +1,84 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="t d">
-  <title id="t">evergreen-recycler</title>
-  <desc id="d">从历史帖子数据挑出赢家内容，生成变体重发排期表</desc>
-  <rect width="1440" height="640" fill="#F2F5EF"/>
-  <rect x="0" y="0" width="1440" height="16" fill="#2E7D5B"/>
-  <rect x="72" y="64" width="1296" height="512" rx="8" fill="#171A19"/>
-  <text x="120" y="130" fill="#8FD6B4" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700">EVERGREEN RECYCLER · WINNER DETECTION + VARIANT REPOST SCHEDULE</text>
-  <text x="120" y="228" fill="#FFFFFF" font-family="Arial, 'PingFang SC', sans-serif" font-size="66" font-weight="800">老帖翻红排期</text>
-  <text x="120" y="292" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="30">历史帖子 CSV 里自动找赢家（平台内中位数倍数 + 分位数），排期硬约束防重复曝光，</text>
-  <text x="120" y="338" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="30">每条留出理由位与文案变体方向——变体重发，绝不原样重贴。</text>
-  <g transform="translate(120 408)">
-    <rect width="360" height="120" rx="6" fill="#2A2E2C"/>
-    <text x="24" y="38" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" font-weight="700">输入：历史帖子台账（posts.csv）</text>
-    <text x="24" y="70" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">平台 · 标题 · 发布日期 · 播放 · 赞 · 评论</text>
-    <text x="24" y="96" fill="#D6D4CB" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">67 行 · 5 个平台 · 缺字段容忍（合成样本）</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="t d">
+  <title id="t">老帖翻红排期 evergreen-recycler</title>
+  <desc id="d">从历史帖子里找出跑赢自己基线的老内容，排出不扎堆、不重复的变体再发计划</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F8F3"/>
+      <stop offset="1" stop-color="#E3EFE6"/>
+    </linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F2B84B"/>
+      <stop offset="1" stop-color="#E39A2D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <circle cx="1080" cy="-40" r="220" fill="#D5E8DA" opacity="0.6"/>
+  <circle cx="60" cy="430" r="140" fill="#D5E8DA" opacity="0.5"/>
+
+  <!-- left: text -->
+  <g font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+    <g transform="translate(80 88)">
+      <rect width="196" height="30" rx="15" fill="#1F5E46"/>
+      <text x="98" y="20" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="600" letter-spacing="1">evergreen-recycler</text>
+    </g>
+    <text x="78" y="186" fill="#16362A" font-size="62" font-weight="800">老帖翻红排期</text>
+    <text x="80" y="236" fill="#3E5A4E" font-size="22">从历史帖子里找出真正跑赢自己的老内容，</text>
+    <text x="80" y="270" fill="#3E5A4E" font-size="22">排出不扎堆、不重复的「变体再发」计划。</text>
+    <g transform="translate(80 312)" font-size="15" fill="#1F5E46">
+      <rect width="104" height="32" rx="6" fill="#FFFFFF" stroke="#B9D4C2"/>
+      <text x="52" y="21" text-anchor="middle">自动找赢家</text>
+      <rect x="116" width="104" height="32" rx="6" fill="#FFFFFF" stroke="#B9D4C2"/>
+      <text x="168" y="21" text-anchor="middle">错峰排期</text>
+      <rect x="232" width="104" height="32" rx="6" fill="#FFFFFF" stroke="#B9D4C2"/>
+      <text x="284" y="21" text-anchor="middle">变体改写</text>
+      <rect x="348" width="104" height="32" rx="6" fill="#FFFFFF" stroke="#B9D4C2"/>
+      <text x="400" y="21" text-anchor="middle">本地计算</text>
+    </g>
   </g>
-  <text x="516" y="478" fill="#F0C94B" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="800">→</text>
-  <g transform="translate(560 408)">
-    <rect width="688" height="120" rx="6" fill="#2E7D5B"/>
-    <text x="24" y="38" fill="#FFFFFF" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" font-weight="700">输出：变体重发排期（真实运行节选）</text>
-    <text x="24" y="70" fill="#D8EFE2" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">09-20 装修避坑 4.93x·P100 ｜ 09-20 记账法 4.7x·P100</text>
-    <text x="24" y="96" fill="#D8EFE2" font-family="Arial, 'PingFang SC', sans-serif" font-size="16">7 条排期 · 每平台 7 天 ≤3 条 · 同帖 ≥60 天 · bi_002 仅标记不排期</text>
+
+  <!-- right: chart card -->
+  <g transform="translate(680 70)" font-family="'PingFang SC','Microsoft YaHei',sans-serif">
+    <rect width="250" height="260" rx="16" fill="#FFFFFF" stroke="#CFE1D4"/>
+    <text x="22" y="36" fill="#6A8577" font-size="14">历史帖子互动量</text>
+    <line x1="22" y1="150" x2="228" y2="150" stroke="#9FBFAC" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <text x="226" y="142" text-anchor="end" fill="#6A8577" font-size="12">账号中位数</text>
+    <g fill="#C7DDCD">
+      <rect x="26" y="168" width="18" height="56" rx="3"/>
+      <rect x="52" y="152" width="18" height="72" rx="3"/>
+      <rect x="78" y="176" width="18" height="48" rx="3"/>
+      <rect x="130" y="160" width="18" height="64" rx="3"/>
+      <rect x="156" y="182" width="18" height="42" rx="3"/>
+      <rect x="182" y="148" width="18" height="76" rx="3"/>
+      <rect x="208" y="170" width="18" height="54" rx="3"/>
+    </g>
+    <rect x="104" y="64" width="18" height="160" rx="3" fill="url(#win)"/>
+    <g transform="translate(92 46)">
+      <rect width="42" height="22" rx="11" fill="#16362A"/>
+      <text x="21" y="16" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="700">≥3×</text>
+    </g>
+    <line x1="22" y1="226" x2="228" y2="226" stroke="#DDE9E0"/>
+    <text x="22" y="248" fill="#16362A" font-size="14" font-weight="600">挑出跑赢自己的那一条</text>
   </g>
-  <text x="120" y="572" fill="#555954" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">样例输出取自仓库内真实运行产物 evals/runs_v1/main_schedule.md（合成样本夹具）</text>
+
+  <!-- arrow loop -->
+  <g fill="none" stroke="#1F5E46" stroke-width="3" stroke-linecap="round">
+    <path d="M942 180 C 962 150, 978 150, 996 172"/>
+    <path d="M986 170 L 997 174 L 998 162" stroke-linejoin="round"/>
+  </g>
+
+  <!-- right: calendar card -->
+  <g transform="translate(1004 110)" font-family="'PingFang SC','Microsoft YaHei',sans-serif">
+    <rect width="150" height="180" rx="16" fill="#1F5E46"/>
+    <text x="18" y="32" fill="#CFE6D8" font-size="14">再发排期</text>
+    <g fill="#2E7558">
+      <rect x="18" y="48" width="20" height="20" rx="4"/><rect x="45" y="48" width="20" height="20" rx="4"/><rect x="72" y="48" width="20" height="20" rx="4"/><rect x="99" y="48" width="20" height="20" rx="4"/>
+      <rect x="18" y="75" width="20" height="20" rx="4"/><rect x="45" y="75" width="20" height="20" rx="4"/><rect x="72" y="75" width="20" height="20" rx="4"/><rect x="99" y="75" width="20" height="20" rx="4"/>
+      <rect x="18" y="102" width="20" height="20" rx="4"/><rect x="45" y="102" width="20" height="20" rx="4"/><rect x="72" y="102" width="20" height="20" rx="4"/><rect x="99" y="102" width="20" height="20" rx="4"/>
+    </g>
+    <rect x="18" y="48" width="20" height="20" rx="4" fill="#F2B84B"/>
+    <rect x="72" y="75" width="20" height="20" rx="4" fill="#F2B84B"/>
+    <rect x="45" y="102" width="20" height="20" rx="4" fill="#F2B84B"/>
+    <text x="18" y="150" fill="#FFFFFF" font-size="14" font-weight="600">每条附理由</text>
+    <text x="18" y="168" fill="#CFE6D8" font-size="12">和文案变体方向</text>
+  </g>
 </svg>

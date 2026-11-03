@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="t d">
+  <title id="t">老帖翻红排期工作流程</title>
+  <desc id="d">输入历史帖子导出表，经过数据体检、找赢家、错峰排期，输出带理由和文案变体方向的再发排期表</desc>
+  <rect width="1200" height="300" fill="#FFFFFF"/>
+  <g font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+
+    <!-- input -->
+    <g transform="translate(40 50)">
+      <rect width="250" height="200" rx="14" fill="#F4F8F3" stroke="#CFE1D4"/>
+      <text x="24" y="40" fill="#6A8577" font-size="14" font-weight="600" letter-spacing="2">输入</text>
+      <text x="24" y="78" fill="#16362A" font-size="24" font-weight="700">历史帖子表</text>
+      <text x="24" y="114" fill="#3E5A4E" font-size="15">创作者后台导出的 CSV</text>
+      <text x="24" y="142" fill="#3E5A4E" font-size="15">平台 · 标题 · 发布日期</text>
+      <text x="24" y="170" fill="#3E5A4E" font-size="15">播放 · 点赞 · 评论 · 收藏…</text>
+    </g>
+
+    <g fill="none" stroke="#9FBFAC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M304 150 H 340"/><path d="M332 142 L 341 150 L 332 158"/>
+      <path d="M860 150 H 896"/><path d="M888 142 L 897 150 L 888 158"/>
+    </g>
+
+    <!-- process -->
+    <g transform="translate(354 50)">
+      <rect width="492" height="200" rx="14" fill="#1F5E46"/>
+      <text x="24" y="40" fill="#A9D3BB" font-size="14" font-weight="600" letter-spacing="2">本地处理</text>
+      <g transform="translate(24 60)">
+        <rect width="140" height="116" rx="10" fill="#2E7558"/>
+        <text x="16" y="34" fill="#F2B84B" font-size="13" font-weight="700">01</text>
+        <text x="16" y="64" fill="#FFFFFF" font-size="19" font-weight="700">数据体检</text>
+        <text x="16" y="92" fill="#CFE6D8" font-size="13">坏行单独计数</text>
+      </g>
+      <g transform="translate(176 60)">
+        <rect width="140" height="116" rx="10" fill="#2E7558"/>
+        <text x="16" y="34" fill="#F2B84B" font-size="13" font-weight="700">02</text>
+        <text x="16" y="64" fill="#FFFFFF" font-size="19" font-weight="700">找赢家</text>
+        <text x="16" y="92" fill="#CFE6D8" font-size="13">≥3× 自身中位数</text>
+      </g>
+      <g transform="translate(328 60)">
+        <rect width="140" height="116" rx="10" fill="#2E7558"/>
+        <text x="16" y="34" fill="#F2B84B" font-size="13" font-weight="700">03</text>
+        <text x="16" y="64" fill="#FFFFFF" font-size="19" font-weight="700">错峰排期</text>
+        <text x="16" y="92" fill="#CFE6D8" font-size="13">同帖间隔 ≥60 天</text>
+      </g>
+    </g>
+
+    <!-- output -->
+    <g transform="translate(910 50)">
+      <rect width="250" height="200" rx="14" fill="#FFF6E5" stroke="#F0D29A"/>
+      <text x="24" y="40" fill="#B7791F" font-size="14" font-weight="600" letter-spacing="2">输出</text>
+      <text x="24" y="78" fill="#16362A" font-size="24" font-weight="700">再发排期表</text>
+      <text x="24" y="114" fill="#5B4A2A" font-size="15">排期日 · 基线倍数</text>
+      <text x="24" y="142" fill="#5B4A2A" font-size="15">为什么是它</text>
+      <text x="24" y="170" fill="#5B4A2A" font-size="15">文案怎么改（1-3 个方向）</text>
+    </g>
+  </g>
+</svg>
